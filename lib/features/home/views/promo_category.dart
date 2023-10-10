@@ -8,15 +8,15 @@ class PromoCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Padding(
-        padding: EdgeInsets.only(left: 0, right: 0),
+        padding: const EdgeInsets.only(left: 0, right: 0),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text(
+            title: const Text(
               'Promo',
               style: TextStyle(
                   color: Colors.black,
@@ -26,7 +26,7 @@ class PromoCategories extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0,
             leading: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios_new,
                 color: Colors.black,
               ),
@@ -38,7 +38,7 @@ class PromoCategories extends StatelessWidget {
               padding: const EdgeInsets.only(left: 30, right: 30),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 7,
                   ),
                   Container(
@@ -46,13 +46,14 @@ class PromoCategories extends StatelessWidget {
                     width: 300,
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.2),
                             spreadRadius: 1,
                             blurRadius: 2,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           )
                         ]),
                     child: Row(
@@ -68,25 +69,25 @@ class PromoCategories extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: BorderSide.none),
                                 hintText: 'Search',
-                                hintStyle:
-                                    TextStyle(color: Colors.grey, fontSize: 18),
+                                hintStyle: const TextStyle(
+                                    color: Colors.grey, fontSize: 18),
                                 prefixIcon: Container(
-                                  padding: EdgeInsets.all(0),
+                                  padding: const EdgeInsets.all(0),
+                                  width: 18,
                                   child: IconButton(
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.search,
                                       color: Colors.grey,
                                     ),
                                     onPressed: () {},
                                   ),
-                                  width: 18,
                                 )),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   Row(
@@ -107,7 +108,7 @@ class PromoCategories extends StatelessWidget {
                                       color: Colors.grey.withOpacity(0.2),
                                       spreadRadius: 1,
                                       blurRadius: 2,
-                                      offset: Offset(0, 3),
+                                      offset: const Offset(0, 3),
                                     )
                                   ]),
                               child: Column(
@@ -126,7 +127,7 @@ class PromoCategories extends StatelessWidget {
                                       child: Padding(
                                         padding: const EdgeInsets.only(
                                             right: 1, top: 1),
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 10,
                                           width: 10,
                                           child: Scaffold(
@@ -135,7 +136,7 @@ class PromoCategories extends StatelessWidget {
                                               backgroundColor:
                                                   Colors.transparent,
                                               elevation: 0,
-                                              leading: Icon(null),
+                                              leading: const Icon(null),
                                               actions: [
                                                 IconButton(
                                                   icon: Image.asset(
@@ -155,14 +156,14 @@ class PromoCategories extends StatelessWidget {
                                       flex: 2,
                                       child: Container(
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             color: Colors.white,
                                             borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(20),
                                               bottomRight: Radius.circular(20),
                                             )),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
+                                        child: const Padding(
+                                          padding: EdgeInsets.only(
                                               left: 10, top: 4, right: 10),
                                           child: Column(
                                             crossAxisAlignment:
@@ -229,7 +230,7 @@ class PromoCategories extends StatelessWidget {
                                         color: Colors.grey.withOpacity(0.2),
                                         spreadRadius: 1,
                                         blurRadius: 2,
-                                        offset: Offset(0, 3),
+                                        offset: const Offset(0, 3),
                                       )
                                     ]),
                                 child: Column(
@@ -249,7 +250,7 @@ class PromoCategories extends StatelessWidget {
                                         child: Padding(
                                           padding: const EdgeInsets.only(
                                               right: 1, top: 1),
-                                          child: Container(
+                                          child: SizedBox(
                                             height: 10,
                                             width: 10,
                                             child: Scaffold(
@@ -259,7 +260,7 @@ class PromoCategories extends StatelessWidget {
                                                 backgroundColor:
                                                     Colors.transparent,
                                                 elevation: 0,
-                                                leading: Icon(null),
+                                                leading: const Icon(null),
                                                 actions: [
                                                   IconButton(
                                                     icon: Image.asset(
@@ -279,15 +280,15 @@ class PromoCategories extends StatelessWidget {
                                         flex: 2,
                                         child: Container(
                                           width: double.infinity,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                               color: Colors.white,
                                               borderRadius: BorderRadius.only(
                                                 bottomLeft: Radius.circular(20),
                                                 bottomRight:
                                                     Radius.circular(20),
                                               )),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
+                                          child: const Padding(
+                                            padding: EdgeInsets.only(
                                                 left: 10, top: 8, right: 10),
                                             child: Column(
                                               crossAxisAlignment:
@@ -358,7 +359,7 @@ class PromoCategories extends StatelessWidget {
                                         color: Colors.grey.withOpacity(0.2),
                                         spreadRadius: 1,
                                         blurRadius: 2,
-                                        offset: Offset(0, 3),
+                                        offset: const Offset(0, 3),
                                       )
                                     ]),
                                 child: Column(
@@ -367,7 +368,7 @@ class PromoCategories extends StatelessWidget {
                                       flex: 5,
                                       child: Container(
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             image: DecorationImage(
                                                 image: AssetImage(
                                                     "assets/kategori/barbeque.png"),
@@ -377,7 +378,7 @@ class PromoCategories extends StatelessWidget {
                                         child: Padding(
                                           padding: const EdgeInsets.only(
                                               right: 1, top: 1),
-                                          child: Container(
+                                          child: SizedBox(
                                             height: 10,
                                             width: 10,
                                             child: Scaffold(
@@ -387,7 +388,7 @@ class PromoCategories extends StatelessWidget {
                                                 backgroundColor:
                                                     Colors.transparent,
                                                 elevation: 0,
-                                                leading: Icon(null),
+                                                leading: const Icon(null),
                                                 actions: [
                                                   IconButton(
                                                     icon: Image.asset(
@@ -407,15 +408,15 @@ class PromoCategories extends StatelessWidget {
                                         flex: 2,
                                         child: Container(
                                           width: double.infinity,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                               color: Colors.white,
                                               borderRadius: BorderRadius.only(
                                                 bottomLeft: Radius.circular(20),
                                                 bottomRight:
                                                     Radius.circular(20),
                                               )),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
+                                          child: const Padding(
+                                            padding: EdgeInsets.only(
                                                 left: 10, top: 8, right: 10),
                                             child: Column(
                                               crossAxisAlignment:
@@ -482,7 +483,7 @@ class PromoCategories extends StatelessWidget {
                                       color: Colors.grey.withOpacity(0.2),
                                       spreadRadius: 1,
                                       blurRadius: 2,
-                                      offset: Offset(0, 3),
+                                      offset: const Offset(0, 3),
                                     )
                                   ]),
                               child: Column(
@@ -491,7 +492,7 @@ class PromoCategories extends StatelessWidget {
                                     flex: 4,
                                     child: Container(
                                       width: double.infinity,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
                                                   "assets/kategori/ramen.png"),
@@ -501,7 +502,7 @@ class PromoCategories extends StatelessWidget {
                                       child: Padding(
                                         padding: const EdgeInsets.only(
                                             right: 1, top: 1),
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 10,
                                           width: 10,
                                           child: Scaffold(
@@ -510,7 +511,7 @@ class PromoCategories extends StatelessWidget {
                                               backgroundColor:
                                                   Colors.transparent,
                                               elevation: 0,
-                                              leading: Icon(null),
+                                              leading: const Icon(null),
                                               actions: [
                                                 IconButton(
                                                   icon: Image.asset(
@@ -530,14 +531,14 @@ class PromoCategories extends StatelessWidget {
                                       flex: 2,
                                       child: Container(
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             color: Colors.white,
                                             borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(20),
                                               bottomRight: Radius.circular(20),
                                             )),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
+                                        child: const Padding(
+                                          padding: EdgeInsets.only(
                                               left: 10, top: 4, right: 10),
                                           child: Column(
                                             crossAxisAlignment:
@@ -613,7 +614,7 @@ class PromoCategories extends StatelessWidget {
                                       color: Colors.grey.withOpacity(0.2),
                                       spreadRadius: 1,
                                       blurRadius: 2,
-                                      offset: Offset(0, 3),
+                                      offset: const Offset(0, 3),
                                     )
                                   ]),
                               child: Column(
@@ -622,7 +623,7 @@ class PromoCategories extends StatelessWidget {
                                     flex: 4,
                                     child: Container(
                                       width: double.infinity,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
                                                   "assets/kategori/ramen.png"),
@@ -632,7 +633,7 @@ class PromoCategories extends StatelessWidget {
                                       child: Padding(
                                         padding: const EdgeInsets.only(
                                             right: 1, top: 1),
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 10,
                                           width: 10,
                                           child: Scaffold(
@@ -641,7 +642,7 @@ class PromoCategories extends StatelessWidget {
                                               backgroundColor:
                                                   Colors.transparent,
                                               elevation: 0,
-                                              leading: Icon(null),
+                                              leading: const Icon(null),
                                               actions: [
                                                 IconButton(
                                                   icon: Image.asset(
@@ -661,14 +662,14 @@ class PromoCategories extends StatelessWidget {
                                       flex: 2,
                                       child: Container(
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             color: Colors.white,
                                             borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(20),
                                               bottomRight: Radius.circular(20),
                                             )),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
+                                        child: const Padding(
+                                          padding: EdgeInsets.only(
                                               left: 10, top: 4, right: 10),
                                           child: Column(
                                             crossAxisAlignment:
@@ -735,7 +736,7 @@ class PromoCategories extends StatelessWidget {
                                         color: Colors.grey.withOpacity(0.2),
                                         spreadRadius: 1,
                                         blurRadius: 2,
-                                        offset: Offset(0, 3),
+                                        offset: const Offset(0, 3),
                                       )
                                     ]),
                                 child: Column(
@@ -744,7 +745,7 @@ class PromoCategories extends StatelessWidget {
                                       flex: 5,
                                       child: Container(
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             image: DecorationImage(
                                                 image: AssetImage(
                                                     "assets/kategori/barbeque.png"),
@@ -754,7 +755,7 @@ class PromoCategories extends StatelessWidget {
                                         child: Padding(
                                           padding: const EdgeInsets.only(
                                               right: 1, top: 1),
-                                          child: Container(
+                                          child: SizedBox(
                                             height: 10,
                                             width: 10,
                                             child: Scaffold(
@@ -764,7 +765,7 @@ class PromoCategories extends StatelessWidget {
                                                 backgroundColor:
                                                     Colors.transparent,
                                                 elevation: 0,
-                                                leading: Icon(null),
+                                                leading: const Icon(null),
                                                 actions: [
                                                   IconButton(
                                                     icon: Image.asset(
@@ -784,15 +785,15 @@ class PromoCategories extends StatelessWidget {
                                         flex: 2,
                                         child: Container(
                                           width: double.infinity,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                               color: Colors.white,
                                               borderRadius: BorderRadius.only(
                                                 bottomLeft: Radius.circular(20),
                                                 bottomRight:
                                                     Radius.circular(20),
                                               )),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
+                                          child: const Padding(
+                                            padding: EdgeInsets.only(
                                                 left: 10, top: 8, right: 10),
                                             child: Column(
                                               crossAxisAlignment:
@@ -863,7 +864,7 @@ class PromoCategories extends StatelessWidget {
                                         color: Colors.grey.withOpacity(0.2),
                                         spreadRadius: 1,
                                         blurRadius: 2,
-                                        offset: Offset(0, 3),
+                                        offset: const Offset(0, 3),
                                       )
                                     ]),
                                 child: Column(
@@ -872,7 +873,7 @@ class PromoCategories extends StatelessWidget {
                                       flex: 5,
                                       child: Container(
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             image: DecorationImage(
                                                 image: AssetImage(
                                                     "assets/kategori/barbeque.png"),
@@ -882,7 +883,7 @@ class PromoCategories extends StatelessWidget {
                                         child: Padding(
                                           padding: const EdgeInsets.only(
                                               right: 1, top: 1),
-                                          child: Container(
+                                          child: SizedBox(
                                             height: 10,
                                             width: 10,
                                             child: Scaffold(
@@ -892,7 +893,7 @@ class PromoCategories extends StatelessWidget {
                                                 backgroundColor:
                                                     Colors.transparent,
                                                 elevation: 0,
-                                                leading: Icon(null),
+                                                leading: const Icon(null),
                                                 actions: [
                                                   IconButton(
                                                     icon: Image.asset(
@@ -912,15 +913,15 @@ class PromoCategories extends StatelessWidget {
                                         flex: 2,
                                         child: Container(
                                           width: double.infinity,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                               color: Colors.white,
                                               borderRadius: BorderRadius.only(
                                                 bottomLeft: Radius.circular(20),
                                                 bottomRight:
                                                     Radius.circular(20),
                                               )),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
+                                          child: const Padding(
+                                            padding: EdgeInsets.only(
                                                 left: 10, top: 8, right: 10),
                                             child: Column(
                                               crossAxisAlignment:
@@ -987,7 +988,7 @@ class PromoCategories extends StatelessWidget {
                                       color: Colors.grey.withOpacity(0.2),
                                       spreadRadius: 1,
                                       blurRadius: 2,
-                                      offset: Offset(0, 3),
+                                      offset: const Offset(0, 3),
                                     )
                                   ]),
                               child: Column(
@@ -996,7 +997,7 @@ class PromoCategories extends StatelessWidget {
                                     flex: 4,
                                     child: Container(
                                       width: double.infinity,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
                                                   "assets/kategori/ramen.png"),
@@ -1006,7 +1007,7 @@ class PromoCategories extends StatelessWidget {
                                       child: Padding(
                                         padding: const EdgeInsets.only(
                                             right: 1, top: 1),
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 10,
                                           width: 10,
                                           child: Scaffold(
@@ -1015,7 +1016,7 @@ class PromoCategories extends StatelessWidget {
                                               backgroundColor:
                                                   Colors.transparent,
                                               elevation: 0,
-                                              leading: Icon(null),
+                                              leading: const Icon(null),
                                               actions: [
                                                 IconButton(
                                                   icon: Image.asset(
@@ -1035,14 +1036,14 @@ class PromoCategories extends StatelessWidget {
                                       flex: 2,
                                       child: Container(
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             color: Colors.white,
                                             borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(20),
                                               bottomRight: Radius.circular(20),
                                             )),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
+                                        child: const Padding(
+                                          padding: EdgeInsets.only(
                                               left: 10, top: 4, right: 10),
                                           child: Column(
                                             crossAxisAlignment:
@@ -1100,14 +1101,14 @@ class PromoCategories extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 100)
+                  const SizedBox(height: 100)
                 ],
               ),
             ),
           ),
           bottomSheet: Container(
             height: 90,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color.fromARGB(255, 255, 122, 0),
             ),
             child: Column(
@@ -1115,7 +1116,7 @@ class PromoCategories extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
                             bottomRight: Radius.circular(20),
@@ -1125,34 +1126,34 @@ class PromoCategories extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: Container(
-                    decoration:
-                        BoxDecoration(color: Color.fromARGB(255, 255, 122, 0)),
+                    decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 255, 122, 0)),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 35, right: 35),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(
-                              onPressed: () => CategoriesPage.open(context),
+                              onPressed: () => HomeScreen.open(context),
                               icon: const Icon(
                                 Icons.home,
                                 color: Colors.white,
                               )),
                           IconButton(
                               onPressed: () {},
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.search,
                                 color: Colors.white,
                               )),
                           IconButton(
                               onPressed: () {},
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.favorite,
                                 color: Colors.white,
                               )),
                           IconButton(
                               onPressed: () => CartScreen.open(context),
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.shopping_cart_sharp,
                                 color: Colors.white,
                               )),

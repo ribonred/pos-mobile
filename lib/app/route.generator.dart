@@ -7,6 +7,9 @@ import '../features/scan/scan.dart';
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case WelcomeScreen.route:
+        return MaterialPageRoute(
+            builder: (_) => const WelcomeScreen(), settings: settings);
       case ScanScreen.route:
         return MaterialPageRoute(
             builder: (_) => const ScanScreen(), settings: settings);
@@ -31,9 +34,7 @@ class RouterGenerator {
       case CartScreen.route:
         return MaterialPageRoute(
             builder: (_) => const CartScreen(), settings: settings);
-      case CategoriesPage.route:
-        return MaterialPageRoute(
-            builder: (_) => const CategoriesPage(), settings: settings);
+
       case DetailFood.route:
         return MaterialPageRoute(
             builder: (_) => const DetailFood(), settings: settings);

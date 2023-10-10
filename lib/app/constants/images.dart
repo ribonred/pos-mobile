@@ -6,11 +6,16 @@ class AppImages {
 }
 
 Image getPngImage(String src,
-        {double? height, double? width, BoxFit? fit, Color? color}) =>
+        {double? height,
+        double? width,
+        BoxFit? fit,
+        Color? color,
+        BlendMode? blendMode}) =>
     Image.asset(
       src,
       color: color,
       height: height,
       width: width,
       fit: fit,
+      colorBlendMode: blendMode,
     );

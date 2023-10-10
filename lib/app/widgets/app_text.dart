@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:menu_barcode_apps/app/constants/app_text_style.dart';
 
-class CustomText extends StatelessWidget {
+class AppText extends StatelessWidget {
   final String text;
   final TextStyle? style;
   final bool ellipsis;
@@ -8,7 +9,7 @@ class CustomText extends StatelessWidget {
   final int? maxLines;
   final bool applyHeightToFirstAscent;
 
-  const CustomText(
+  const AppText(
     this.text, {
     Key? key,
     this.ellipsis = false,
@@ -21,7 +22,7 @@ class CustomText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(text,
-        style: style,
+        style: style ?? AppTextStyle.body1,
         textAlign: textAlign,
         overflow: ellipsis ? TextOverflow.ellipsis : null,
         maxLines: maxLines,

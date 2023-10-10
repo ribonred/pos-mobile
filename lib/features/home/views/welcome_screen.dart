@@ -6,16 +6,16 @@ import '../../../app/constants/app_colors.dart';
 import '../../../app/constants/app_text_style.dart';
 import '../../../app/widgets/widgets.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-  static const String route = '/HomeScreen_screen';
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({Key? key}) : super(key: key);
+  static const String route = '/welcome_screen';
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
     super.initState();

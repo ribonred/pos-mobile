@@ -10,9 +10,9 @@ class RouterGenerator {
       case ScanScreen.route:
         return MaterialPageRoute(
             builder: (_) => const ScanScreen(), settings: settings);
-      case HomeScreen.route:
+      case WelcomeScreen.route:
         return MaterialPageRoute(
-            builder: (_) => const HomeScreen(), settings: settings);
+            builder: (_) => const WelcomeScreen(), settings: settings);
       case FoodCategory.route:
         return MaterialPageRoute(
             builder: (_) => const FoodCategory(), settings: settings);

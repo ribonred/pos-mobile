@@ -13,9 +13,7 @@ class App extends StatelessWidget {
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Poppins'),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: RouterGenerator.generateRoute,
       home: const HomeScreen(),

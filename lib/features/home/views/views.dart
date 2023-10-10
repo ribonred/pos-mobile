@@ -1,4 +1,4 @@
-export 'home_screen.dart';
+export 'welcome_screen.dart';
 export 'category.dart';
 export 'cart_screen.dart';
 export 'detail_food.dart';

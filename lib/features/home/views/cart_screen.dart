@@ -32,7 +32,7 @@ class CartScreen extends StatelessWidget {
                 Icons.arrow_back_ios_new,
                 color: Colors.black,
               ),
-              onPressed: () => CategoriesPage.open(context),
+              onPressed: () => HomeScreen.open(context),
             ),
           ),
           body: SingleChildScrollView(
@@ -146,11 +146,11 @@ class CartScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 31),
-                            Container(
+                            SizedBox(
                               height: 150,
                               width: 40,
                               child: GestureDetector(
-                                onTap: () => CategoriesPage.open(context),
+                                onTap: () => HomeScreen.open(context),
                                 child: Container(
                                   decoration: const BoxDecoration(
                                       color: Color.fromARGB(255, 255, 122, 0),
@@ -282,7 +282,7 @@ class CartScreen extends StatelessWidget {
                               height: 150,
                               width: 40,
                               child: GestureDetector(
-                                onTap: () => CategoriesPage.open(context),
+                                onTap: () => HomeScreen.open(context),
                                 child: Container(
                                   decoration: const BoxDecoration(
                                       color: Color.fromARGB(255, 255, 122, 0),
@@ -349,10 +349,10 @@ class CartScreen extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Row(
+                                  const Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
@@ -392,7 +392,7 @@ class CartScreen extends StatelessWidget {
                                         ),
                                         onPressed: () {},
                                       ),
-                                      Text(
+                                      const Text(
                                         "1",
                                         style: TextStyle(
                                             color: Color.fromARGB(
@@ -413,22 +413,22 @@ class CartScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 31,
                             ),
-                            Container(
+                            SizedBox(
                               height: 150,
                               width: 40,
                               child: GestureDetector(
-                                onTap: () => CategoriesPage.open(context),
+                                onTap: () => HomeScreen.open(context),
                                 child: Container(
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       color: Color.fromARGB(255, 255, 122, 0),
                                       borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(20),
                                         bottomRight: Radius.circular(20),
                                       )),
-                                  child: Center(
+                                  child: const Center(
                                       child: Icon(
                                     Icons.delete,
                                     color: Colors.white,
@@ -441,12 +441,12 @@ class CartScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Column(
                     children: [
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
@@ -461,10 +461,10 @@ class CartScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
@@ -479,10 +479,10 @@ class CartScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(

@@ -216,7 +216,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () => CategoriesPage.open(context),
+                        onPressed: () => HomeScreen.open(context),
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               const Color.fromARGB(255, 255, 122, 0),
@@ -246,11 +246,11 @@ class _PaymentPageState extends State<PaymentPage> {
         choice[i] = false;
       }
 
-      print(' click ${index}');
+      print(' click $index');
       choice[index] = value;
 
-      _finalSelection = ' index ${index}  {$value}';
-      print(' final selection ${_finalSelection}');
+      _finalSelection = ' index $index  {$value}';
+      print(' final selection $_finalSelection');
     });
   }
 }

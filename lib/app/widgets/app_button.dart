@@ -26,6 +26,7 @@ class AppButton extends StatelessWidget {
   final bool disabled;
   final AppButtonVariant variant;
   final AppButtonSize size;
+  final bool useBorder;
   const AppButton({
     Key? key,
     required this.label,
@@ -37,40 +38,41 @@ class AppButton extends StatelessWidget {
     this.disabled = false,
     this.variant = AppButtonVariant.primary,
     this.size = AppButtonSize.big,
+    this.useBorder = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    BorderRadius initialBorderRadius = BorderRadius.circular(20);
+    BorderRadius initialBorderRadius = BorderRadius.circular(30);
     return Padding(
       padding: margin,
-      child: Material(
+      child: InkWell(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         borderRadius: borderRadius ?? initialBorderRadius,
-        color: disabled ? disabledBgColor : bgColor,
-        child: InkWell(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          borderRadius: borderRadius ?? initialBorderRadius,
-          onTap: () {
-            if (!disabled) {
-              FocusManager.instance.primaryFocus?.unfocus();
-              onTap();
-            }
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: size != AppButtonSize.big
-                  ? MainAxisSize.min
-                  : MainAxisSize.max,
-              children: [
-                prefixIcon,
-                AppText(label,
-                    style: disabled ? disabledLabelStyle : labelStyle),
-                suffixIcon
-              ],
-            ),
+        onTap: () {
+          if (!disabled) {
+            FocusManager.instance.primaryFocus?.unfocus();
+            onTap();
+          }
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: bgColor,
+            border:
+                useBorder ? Border.all(color: Colors.white, width: 2) : null,
+            borderRadius: borderRadius ?? initialBorderRadius,
+          ),
+          padding: paddingValue,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize:
+                size != AppButtonSize.big ? MainAxisSize.min : MainAxisSize.max,
+            children: [
+              prefixIcon,
+              AppText(label, style: disabled ? disabledLabelStyle : labelStyle),
+              suffixIcon
+            ],
           ),
         ),
       ),
@@ -126,6 +128,17 @@ class AppButton extends StatelessWidget {
       default:
         return AppTextStyle.title2
             .copyWith(fontWeight: FontWeight.w600, color: disabledLabelColor);
+    }
+  }
+
+  EdgeInsets get paddingValue {
+    switch (size) {
+      case AppButtonSize.small:
+        return const EdgeInsets.symmetric(horizontal: 15, vertical: 10);
+      case AppButtonSize.regular:
+        return const EdgeInsets.symmetric(horizontal: 20, vertical: 10);
+      default:
+        return const EdgeInsets.symmetric(horizontal: 20, vertical: 15);
     }
   }
 }

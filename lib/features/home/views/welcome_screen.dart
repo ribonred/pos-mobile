@@ -5,6 +5,7 @@ import 'package:menu_barcode_apps/app/constants/images.dart';
 import '../../../app/constants/app_colors.dart';
 import '../../../app/constants/app_text_style.dart';
 import '../../../app/widgets/widgets.dart';
+import '../../scan/scan.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -52,7 +53,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           TextSpan(
                               text: ' Food\n',
                               style: TextStyle(fontWeight: FontWeight.w600)),
-                          TextSpan(text: 'is Waiting\n'),
+                          TextSpan(text: 'Is Waiting\n'),
                           TextSpan(
                               text: 'For You',
                               style: TextStyle(fontWeight: FontWeight.w600)),
@@ -71,7 +72,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   margin: const EdgeInsets.fromLTRB(34, 0, 34, 50),
                   variant: AppButtonVariant.primary,
                   label: 'Scan QR Code',
-                  onTap: () {},
+                  onTap: () => ScanScreen.open(context),
                   suffixIcon: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.white,

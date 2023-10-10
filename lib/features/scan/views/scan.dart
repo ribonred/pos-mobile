@@ -10,39 +10,36 @@ class ScanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Color.fromARGB(255, 255, 122, 0)),
+      decoration: const BoxDecoration(color: Color.fromARGB(255, 255, 122, 0)),
       child: Padding(
         padding: const EdgeInsets.only(top: 10.0),
-//button mbalik
         child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 leading: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back_ios,
                     color: Color.fromARGB(255, 255, 255, 255),
                   ),
                   onPressed: () => HomeScreen.open(context),
                 ),
-//button lanjut
                 actions: [
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_forward_ios,
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
                     onPressed: () => CategoriesPage.open(context),
                   ),
                 ]),
-//tulisan scan qr
             body: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10),
                     child: Text(
                       'Scan QR Code',
                       style: TextStyle(
@@ -52,10 +49,9 @@ class ScanScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-//tulisan move cam
-                  Center(
+                  const Center(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                      padding: EdgeInsets.only(top: 10),
                       child: Text(
                         'Please move the camera ',
                         style: TextStyle(
@@ -66,10 +62,9 @@ class ScanScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-//tulisan over
-                  Center(
+                  const Center(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 0),
+                      padding: EdgeInsets.only(top: 0),
                       child: Text(
                         'over another device’s screen',
                         style: TextStyle(
@@ -80,8 +75,6 @@ class ScanScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
-//gambar di tengah
                   Padding(
                     padding: const EdgeInsets.only(top: 50),
                     child: Container(
@@ -96,23 +89,22 @@ class ScanScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
-//button scan here
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 100),
                       child: ElevatedButton(
                         onPressed: () => QRViewExample.open(context),
-                        child: Text(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 255, 122, 0),
+                          minimumSize: const Size(200, 50),
+                          shape: const StadiumBorder(),
+                          padding: const EdgeInsets.all(16),
+                          side: const BorderSide(color: Colors.white, width: 2),
+                        ),
+                        child: const Text(
                           'Scan Here',
                           style: TextStyle(fontSize: 20),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 255, 122, 0),
-                          minimumSize: Size(200, 50),
-                          shape: StadiumBorder(),
-                          padding: EdgeInsets.all(16),
-                          side: BorderSide(color: Colors.white, width: 2),
                         ),
                       ),
                     ),

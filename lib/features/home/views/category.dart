@@ -91,11 +91,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 8),
                       child: Text(
                         "Categories",
                         style: TextStyle(
@@ -107,14 +107,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0),
-                          child: Container(
+                          child: SizedBox(
                             height: 140,
                             width: 140,
                             child: GestureDetector(
                               onTap: () => FoodCategory.open(context),
                               child: Container(
                                 decoration: BoxDecoration(
-                                  image: DecorationImage(
+                                  image: const DecorationImage(
                                       image: AssetImage(
                                           "assets/kategori/KategoriMakanan.png")),
                                   borderRadius: BorderRadius.circular(20),
@@ -143,11 +143,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         ),
                       ],
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
+                          padding: EdgeInsets.only(top: 8.0),
                           child: Text(
                             'Food',
                             style: TextStyle(
@@ -157,7 +157,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
+                          padding: EdgeInsets.only(top: 8.0),
                           child: Text(
                             'Promo',
                             style: TextStyle(
@@ -173,14 +173,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0),
-                          child: Container(
+                          child: SizedBox(
                             height: 140,
                             width: 140,
                             child: GestureDetector(
                               onTap: () => SnackCategories.open(context),
                               child: Container(
                                 decoration: BoxDecoration(
-                                  image: DecorationImage(
+                                  image: const DecorationImage(
                                       image: AssetImage(
                                           "assets/kategori/KategoriSnack.png")),
                                   borderRadius: BorderRadius.circular(20),
@@ -209,11 +209,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         ),
                       ],
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
+                          padding: EdgeInsets.only(top: 8.0),
                           child: Text(
                             'Snack',
                             style: TextStyle(
@@ -223,7 +223,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
+                          padding: EdgeInsets.only(top: 8.0),
                           child: Text(
                             'Drink',
                             style: TextStyle(
@@ -239,7 +239,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
           ),
           bottomSheet: Container(
             height: 90,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color.fromARGB(255, 255, 122, 0),
             ),
             child: Column(
@@ -247,7 +247,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 Expanded(
                   flex: 1,
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
                             bottomRight: Radius.circular(20),
@@ -258,7 +258,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   flex: 3,
                   child: Container(
                     decoration:
-                        BoxDecoration(color: Color.fromARGB(255, 255, 122, 0)),
+                        const BoxDecoration(color: Color.fromARGB(255, 255, 122, 0)),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 35, right: 35),
                       child: Row(
@@ -266,7 +266,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         children: [
                           IconButton(
                               onPressed: () {},
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.home,
                                 color: Colors.white,
                               )),

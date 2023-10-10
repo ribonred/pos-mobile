@@ -246,11 +246,11 @@ class _PaymentPageState extends State<PaymentPage> {
         choice[i] = false;
       }
 
-      print(' click ${index}');
+      print(' click $index');
       choice[index] = value;
 
-      _finalSelection = ' index ${index}  {$value}';
-      print(' final selection ${_finalSelection}');
+      _finalSelection = ' index $index  {$value}';
+      print(' final selection $_finalSelection');
     });
   }
 }

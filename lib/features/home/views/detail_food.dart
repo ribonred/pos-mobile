@@ -23,7 +23,7 @@ class _DetailFoodState extends State<DetailFood> {
           Expanded(
             flex: 2,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("assets/kategori/ramen.png"),
                     fit: BoxFit.cover),
@@ -37,7 +37,7 @@ class _DetailFoodState extends State<DetailFood> {
           Expanded(
             flex: 3,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +45,7 @@ class _DetailFoodState extends State<DetailFood> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("IndoEmi Elite", style: TextStyle(fontSize: 34)),
+                      const Text("IndoEmi Elite", style: TextStyle(fontSize: 34)),
                       IconButton(
                         icon: Image.asset(
                           "assets/kategori/love_button.png",
@@ -55,7 +55,7 @@ class _DetailFoodState extends State<DetailFood> {
                       ),
                     ],
                   ),
-                  Row(
+                  const Row(
                     children: [
                       Text("4,9", style: TextStyle(fontSize: 15)),
                       Icon(
@@ -64,13 +64,13 @@ class _DetailFoodState extends State<DetailFood> {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Rp.80.000",
                         style: TextStyle(
                             color: Colors.black,
@@ -87,17 +87,17 @@ class _DetailFoodState extends State<DetailFood> {
                             ),
                             onPressed: () {},
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
-                          Text(
+                          const Text(
                             "1",
                             style: TextStyle(
                                 color: Color.fromARGB(255, 255, 122, 0),
                                 fontSize: 25,
                                 fontWeight: FontWeight.w500),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           IconButton(
@@ -112,24 +112,24 @@ class _DetailFoodState extends State<DetailFood> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     "About the food",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 22,
                         fontWeight: FontWeight.bold),
                   ),
-                  Text(
+                  const Text(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit et viverra pellentesque et congue aliquam at eget suspendisse..",
                     style: TextStyle(color: Colors.black, fontSize: 15),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
-                  Text(
+                  const Text(
                     "Sauce",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
@@ -162,7 +162,7 @@ class _DetailFoodState extends State<DetailFood> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Center(

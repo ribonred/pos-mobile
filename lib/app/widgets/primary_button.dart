@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:menu_barcode_apps/app/widgets/widgets.dart';
+
 enum PrimaryButtonType {
   primary,
   secondary,
@@ -7,10 +9,21 @@ enum PrimaryButtonType {
 }
 
 class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({super.key});
+  final String label;
+  final VoidCallback onTap;
+  const PrimaryButton({
+    Key? key,
+    required this.label,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: () {}, child: Text('test'));
+    return InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          child: CustomText(label),
+        ));
   }
 }

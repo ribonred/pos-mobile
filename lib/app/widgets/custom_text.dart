@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomTextNew extends StatelessWidget {
+class CustomText extends StatelessWidget {
   final String text;
   final TextStyle? style;
   final bool ellipsis;
@@ -8,7 +8,7 @@ class CustomTextNew extends StatelessWidget {
   final int? maxLines;
   final bool applyHeightToFirstAscent;
 
-  const CustomTextNew(
+  const CustomText(
     this.text, {
     Key? key,
     this.ellipsis = false,

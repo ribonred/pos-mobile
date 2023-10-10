@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 
 import 'views.dart';
 
-class CategoriesPage extends StatefulWidget {
-  static const String route = 'category_screen';
+class HomeScreen extends StatefulWidget {
+  static const String route = 'home_screen';
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 
-  const CategoriesPage({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<CategoriesPage> createState() => _CategoriesPageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _CategoriesPageState extends State<CategoriesPage> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(

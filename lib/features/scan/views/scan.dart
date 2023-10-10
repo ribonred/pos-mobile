@@ -23,7 +23,7 @@ class ScanScreen extends StatelessWidget {
                     Icons.arrow_back_ios,
                     color: Color.fromARGB(255, 255, 255, 255),
                   ),
-                  onPressed: () => HomeScreen.open(context),
+                  onPressed: () => WelcomeScreen.open(context),
                 ),
                 actions: [
                   IconButton(
@@ -31,7 +31,7 @@ class ScanScreen extends StatelessWidget {
                       Icons.arrow_forward_ios,
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
-                    onPressed: () => CategoriesPage.open(context),
+                    onPressed: () => HomeScreen.open(context),
                   ),
                 ]),
             body: SingleChildScrollView(

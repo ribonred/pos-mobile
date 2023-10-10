@@ -1125,15 +1125,15 @@ class DrinkCategories extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: Container(
-                    decoration:
-                        const BoxDecoration(color: Color.fromARGB(255, 255, 122, 0)),
+                    decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 255, 122, 0)),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 35, right: 35),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(
-                              onPressed: () => CategoriesPage.open(context),
+                              onPressed: () => HomeScreen.open(context),
                               icon: const Icon(
                                 Icons.home,
                                 color: Colors.white,

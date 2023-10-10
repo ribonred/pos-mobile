@@ -46,7 +46,8 @@ class PromoCategories extends StatelessWidget {
                     width: 300,
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.2),
@@ -68,8 +69,8 @@ class PromoCategories extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: BorderSide.none),
                                 hintText: 'Search',
-                                hintStyle:
-                                    const TextStyle(color: Colors.grey, fontSize: 18),
+                                hintStyle: const TextStyle(
+                                    color: Colors.grey, fontSize: 18),
                                 prefixIcon: Container(
                                   padding: const EdgeInsets.all(0),
                                   width: 18,
@@ -1125,15 +1126,15 @@ class PromoCategories extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: Container(
-                    decoration:
-                        const BoxDecoration(color: Color.fromARGB(255, 255, 122, 0)),
+                    decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 255, 122, 0)),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 35, right: 35),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(
-                              onPressed: () => CategoriesPage.open(context),
+                              onPressed: () => HomeScreen.open(context),
                               icon: const Icon(
                                 Icons.home,
                                 color: Colors.white,

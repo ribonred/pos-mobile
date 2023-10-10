@@ -216,7 +216,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () => CategoriesPage.open(context),
+                        onPressed: () => HomeScreen.open(context),
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               const Color.fromARGB(255, 255, 122, 0),

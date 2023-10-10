@@ -32,7 +32,7 @@ class CartScreen extends StatelessWidget {
                 Icons.arrow_back_ios_new,
                 color: Colors.black,
               ),
-              onPressed: () => CategoriesPage.open(context),
+              onPressed: () => HomeScreen.open(context),
             ),
           ),
           body: SingleChildScrollView(
@@ -150,7 +150,7 @@ class CartScreen extends StatelessWidget {
                               height: 150,
                               width: 40,
                               child: GestureDetector(
-                                onTap: () => CategoriesPage.open(context),
+                                onTap: () => HomeScreen.open(context),
                                 child: Container(
                                   decoration: const BoxDecoration(
                                       color: Color.fromARGB(255, 255, 122, 0),
@@ -282,7 +282,7 @@ class CartScreen extends StatelessWidget {
                               height: 150,
                               width: 40,
                               child: GestureDetector(
-                                onTap: () => CategoriesPage.open(context),
+                                onTap: () => HomeScreen.open(context),
                                 child: Container(
                                   decoration: const BoxDecoration(
                                       color: Color.fromARGB(255, 255, 122, 0),
@@ -420,7 +420,7 @@ class CartScreen extends StatelessWidget {
                               height: 150,
                               width: 40,
                               child: GestureDetector(
-                                onTap: () => CategoriesPage.open(context),
+                                onTap: () => HomeScreen.open(context),
                                 child: Container(
                                   decoration: const BoxDecoration(
                                       color: Color.fromARGB(255, 255, 122, 0),

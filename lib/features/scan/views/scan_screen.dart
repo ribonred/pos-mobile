@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menu_barcode_apps/app/constants/app_text_style.dart';
 import 'package:menu_barcode_apps/app/constants/images.dart';
-import 'package:menu_barcode_apps/app/widgets/app_header.dart';
 import 'package:menu_barcode_apps/app/widgets/widgets.dart';
 import 'package:menu_barcode_apps/features/home/views/views.dart';
 
@@ -34,7 +33,8 @@ class ScanScreen extends StatelessWidget {
                               color: Colors.white,
                               size: 30,
                             ),
-                            onPressed: () => HomeScreen.open(context),
+                            onPressed: () =>
+                                HomeScreen.openAndRemoveAllRoute(context),
                             tooltip: 'Go to HomeScreen',
                           )
                         ],

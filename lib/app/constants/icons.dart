@@ -9,7 +9,7 @@ class AppIcons {
 }
 
 Widget getSvgImage(String src,
-        {ColorFilter? colorFilter,
+        {Color color = Colors.black,
         double? height,
         double? width,
         BoxFit fit = BoxFit.scaleDown}) =>
@@ -18,5 +18,5 @@ Widget getSvgImage(String src,
       height: height,
       width: width,
       fit: fit,
-      colorFilter: colorFilter,
+      colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
     );

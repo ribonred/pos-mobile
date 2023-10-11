@@ -70,6 +70,7 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             GestureDetector(
+              onTap: () => HomeScreen.openAndRemoveAllRoute(context),
               child: const Icon(
                 Icons.home_outlined,
                 color: Colors.white,
@@ -77,14 +78,10 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              child: getSvgImage(AppIcons.search,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.white, BlendMode.clear)),
+              child: getSvgImage(AppIcons.search, color: Colors.white),
             ),
-            const Icon(
-              Icons.favorite_border,
-              color: Colors.white,
-              size: 30,
+            GestureDetector(
+              child: getSvgImage(AppIcons.search, color: Colors.white),
             ),
             GestureDetector(
               onTap: () => CartScreen.open(context),

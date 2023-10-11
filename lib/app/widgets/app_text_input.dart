@@ -22,11 +22,8 @@ class AppTextInput extends StatelessWidget {
           focusedBorder: const OutlineInputBorder(borderSide: BorderSide.none),
           prefixIcon: Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: getSvgImage(
-                AppIcons.search,
-                height: 17,
-                width: 17,
-              )),
+              child: getSvgImage(AppIcons.search,
+                  height: 30, width: 30, color: Colors.grey)),
           hintText: 'Search',
           hintStyle: TextStyle(color: Colors.grey.shade400),
           focusColor: AppColors.primaryOrange,

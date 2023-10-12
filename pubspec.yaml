@@ -34,6 +34,8 @@ dependencies:
   qr_code_scanner: ^1.0.1
   flutter_svg: ^2.0.7
   google_fonts: ^6.1.0
+  collection: ^1.17.2
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -91,6 +93,8 @@ flutter:
     - assets/scan/
     - assets/kategori/
     - assets/fonts/
+    - assets/icons/
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

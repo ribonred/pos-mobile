@@ -1,0 +1,10 @@
+{
+  "status": true,
+  "message": "Successfully get menu data",
+  "data": [
+    {
+      "food_id": 1,
+      "food_name": ""
+    }
+  ]
+}

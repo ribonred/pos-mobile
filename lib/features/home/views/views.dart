@@ -1,5 +1,5 @@
 export 'welcome_screen.dart';
-export 'category.dart';
+export 'home_screen.dart';
 export 'cart_screen.dart';
 export 'detail_food.dart';
 export 'drink_category.dart';

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:menu_barcode_apps/app/widgets/widgets.dart';
 
-class DrinkCategories extends StatelessWidget {
-  static const String route = '/drink_category_screen';
-  const DrinkCategories({super.key});
+class FavoriteScreen extends StatelessWidget {
+  static const String route = '/favorite_screen';
+  const FavoriteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder(
-      child: AppText('Drink Menu'),
+    return const Column(
+      children: [
+        AppText('Favorite Screen'),
+        Placeholder(),
+      ],
     );
   }
 

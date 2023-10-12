@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:menu_barcode_apps/app/constants/app_text_style.dart';
 import 'package:menu_barcode_apps/app/widgets/app_text.dart';
 
-import '../../../../app/constants/images.dart';
+import '../../../app/constants/images.dart';
 
 class CardMenu extends StatelessWidget {
   final String label;

@@ -4,7 +4,11 @@ enum TabPage {
   menu('Menu'),
   search('Search'),
   favorite('Favorite'),
-  cart('Cart');
+  cart('Cart'),
+  foodMenu('Food Menu'),
+  promo('Promo'),
+  snack('Snack'),
+  drink('Drink');
 
   final String name;
   const TabPage(this.name);

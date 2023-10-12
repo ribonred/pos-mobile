@@ -41,6 +41,14 @@ class HomeScreen extends StatelessWidget {
                     return const FavoriteScreen();
                   case TabPage.cart:
                     return const CartScreen();
+                  case TabPage.foodMenu:
+                    return const FoodCategory();
+                  case TabPage.promo:
+                    return const PromoCategories();
+                  case TabPage.snack:
+                    return const SnackCategories();
+                  case TabPage.drink:
+                    return const DrinkCategories();
                   default:
                     return const MenuScreen();
                 }

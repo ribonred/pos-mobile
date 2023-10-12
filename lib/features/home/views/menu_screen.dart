@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:menu_barcode_apps/app/widgets/widgets.dart';
 
 import '../../../app/constants/app_text_style.dart';
 import '../models/models.dart';
 import '../widgets/card_menu.dart';
+import 'tab/bloc/tab_bloc.dart';
 
 class MenuScreen extends StatelessWidget {
   static const String route = 'menu_screen';
@@ -37,7 +39,10 @@ class MenuScreen extends StatelessWidget {
               childAspectRatio: 0.8,
               children: menuCategories(context)
                   .map((e) => CardMenu(
-                      label: e.name, iconFile: e.icon, onTap: e.action))
+                      label: e.name,
+                      iconFile: e.icon,
+                      onTap: () =>
+                          context.read<TabBloc>().add(OnChangedTab(e.tabPage))))
                   .toList()),
         )
       ],

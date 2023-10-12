@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../app/widgets/widgets.dart';
+import 'tab/bloc/tab_bloc.dart';
 import 'views.dart';
 
 class FoodCategory extends StatelessWidget {
@@ -16,31 +19,18 @@ class FoodCategory extends StatelessWidget {
         padding: const EdgeInsets.only(left: 0, right: 0),
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: const Text(
-              'Food',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25),
-            ),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios_new,
-                color: Colors.black,
-              ),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(left: 30, right: 30),
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 7,
+                  // const SizedBox(
+                  //   height: 7,
+                  // ),
+                  AppHeader(
+                    title: 'Drink Screen',
+                    onTapBack: () =>
+                        context.read<TabBloc>().add(BackToMainMenu()),
                   ),
                   Container(
                     height: 60,

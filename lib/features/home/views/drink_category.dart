@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:menu_barcode_apps/app/widgets/widgets.dart';
+
+import 'tab/bloc/tab_bloc.dart';
 
 class DrinkCategories extends StatelessWidget {
   static const String route = '/drink_category_screen';
@@ -7,8 +10,15 @@ class DrinkCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder(
-      child: AppText('Drink Menu'),
+    return Column(
+      children: [
+        AppHeader(
+          title: 'Drink Screen',
+          onTapBack: () => context.read<TabBloc>().add(BackToMainMenu()),
+        ),
+        // AppText('Drink Screen'),
+        const Placeholder(),
+      ],
     );
   }
 

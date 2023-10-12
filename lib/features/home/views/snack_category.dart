@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../app/widgets/widgets.dart';
+import 'tab/bloc/tab_bloc.dart';
 
 class SnackCategories extends StatelessWidget {
   static const String route = '/snack_category_screen';
@@ -8,8 +10,15 @@ class SnackCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder(
-      child: AppText('Snack Screen'),
+    return Column(
+      children: [
+        AppHeader(
+          title: 'Snack Screen',
+          onTapBack: () => context.read<TabBloc>().add(BackToMainMenu()),
+        ),
+        // AppText('Drink Screen'),
+        const Placeholder(),
+      ],
     );
   }
 

@@ -6,10 +6,10 @@ part 'tab_event.dart';
 
 class TabBloc extends Bloc<TabEvent, TabState> {
   TabBloc() : super(const TabState()) {
-    on<OnChangedTab>(_onChangedTab);
-  }
-
-  _onChangedTab(OnChangedTab event, Emitter<TabState> emit) {
-    emit(state.copyWith(selectedTab: event.tabPage));
+    on<OnChangedTab>(
+        (event, emit) => emit(state.copyWith(selectedTab: event.tabPage)));
+    on<BackToMainMenu>(
+      (event, emit) => emit(state.copyWith(selectedTab: TabPage.menu)),
+    );
   }
 }

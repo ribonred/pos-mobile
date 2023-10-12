@@ -9,6 +9,7 @@ class AppHeader extends StatelessWidget {
   final Color iconBgColor;
   final Color iconColor;
   final double elevationIcon;
+  final VoidCallback? onTapBack;
   const AppHeader({
     Key? key,
     this.title = '',
@@ -17,6 +18,7 @@ class AppHeader extends StatelessWidget {
     this.iconBgColor = Colors.transparent,
     this.elevationIcon = 0,
     this.iconColor = Colors.black,
+    this.onTapBack,
   }) : super(key: key);
 
   @override
@@ -33,7 +35,9 @@ class AppHeader extends StatelessWidget {
             elevation: elevationIcon,
             child: IconButton(
               splashRadius: 1,
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                onTapBack != null ? onTapBack!() : Navigator.pop(context);
+              },
               alignment: Alignment.topCenter,
               visualDensity: const VisualDensity(horizontal: 0, vertical: 0),
               icon: Icon(Icons.arrow_back_ios_new_rounded,

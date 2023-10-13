@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:menu_barcode_apps/app/constants/app_text_style.dart';
 import 'package:menu_barcode_apps/app/widgets/widgets.dart';
 
@@ -36,7 +37,7 @@ class AppHeader extends StatelessWidget {
             child: IconButton(
               splashRadius: 1,
               onPressed: () {
-                onTapBack != null ? onTapBack!() : Navigator.pop(context);
+                onTapBack != null ? onTapBack!() : Get.back();
               },
               alignment: Alignment.topCenter,
               visualDensity: const VisualDensity(horizontal: 0, vertical: 0),

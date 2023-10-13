@@ -4,11 +4,11 @@ import 'package:menu_barcode_apps/app/widgets/app_text.dart';
 
 import '../../../app/constants/images.dart';
 
-class CardMenu extends StatelessWidget {
+class CategoryCard extends StatelessWidget {
   final String label;
   final String iconFile;
   final VoidCallback onTap;
-  const CardMenu({
+  const CategoryCard({
     Key? key,
     required this.label,
     required this.iconFile,

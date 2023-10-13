@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+
 import 'package:menu_barcode_apps/app/constants/app_colors.dart';
 import 'package:menu_barcode_apps/app/constants/icons.dart';
 
 class AppTextInput extends StatelessWidget {
-  const AppTextInput({super.key});
+  final EdgeInsets margin;
+  const AppTextInput({
+    Key? key,
+    this.margin = EdgeInsets.zero,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: margin,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),

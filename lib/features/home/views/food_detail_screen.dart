@@ -16,6 +16,7 @@ class FoodDetailsScreen extends StatefulWidget {
 
 class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
   int _value = 1;
+  final data = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +62,10 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                         ),
                       ],
                     ),
-                    const Row(
+                    Row(
                       children: [
-                        Text("4,9", style: TextStyle(fontSize: 15)),
-                        Icon(
+                        Text(data.toString(), style: TextStyle(fontSize: 15)),
+                        const Icon(
                           Icons.star,
                           color: Color.fromARGB(255, 255, 122, 0),
                         )

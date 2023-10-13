@@ -23,7 +23,10 @@ class RouterGenerator {
         return GetPageRoute(
             page: () => const SearchScreen(), settings: settings);
       case FoodScreen.route:
-        return GetPageRoute(page: () => FoodScreen(), settings: settings);
+        return GetPageRoute(
+          page: () => const FoodScreen(),
+          settings: settings,
+        );
       case SnackScreen.route:
         return GetPageRoute(
             page: () => const SnackScreen(), settings: settings);

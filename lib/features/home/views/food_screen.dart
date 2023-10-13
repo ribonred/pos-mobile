@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:menu_barcode_apps/app/constants/app_text_style.dart';
-import 'package:menu_barcode_apps/core/widgets/menu_card.dart';
 import 'package:menu_barcode_apps/features/home/home.dart';
-import 'package:menu_barcode_apps/features/home/views/tab/bottom_tab_controller.dart';
 
 import '../../../app/widgets/widgets.dart';
+import '../../../core/widgets/menu_card.dart';
+import 'tab/bottom_tab_controller.dart';
 
 class FoodScreen extends StatelessWidget {
   static const String route = '/food_category_screen';
-  FoodScreen({Key? key}) : super(key: key);
+  const FoodScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,11 @@ class FoodScreen extends StatelessWidget {
                       mainAxisExtent: 200,
                     ),
                     itemCount: 20,
-                    itemBuilder: (context, index) => MenuCard(rate: index),
+                    itemBuilder: (context, index) => MenuCard(
+                      rate: index,
+                      onTap: () => Get.toNamed(FoodDetailsScreen.route,
+                          arguments: index),
+                    ),
                   ),
                 ),
               ],

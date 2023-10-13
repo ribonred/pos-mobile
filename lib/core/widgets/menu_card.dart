@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 
 import '../../app/constants/app_text_style.dart';
 import '../../app/widgets/widgets.dart';
-import '../../features/home/home.dart';
 
 class MenuCard extends StatelessWidget {
   final int rate;
+  final VoidCallback onTap;
   const MenuCard({
     Key? key,
     required this.rate,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FoodDetailsScreen.open(),
+      onTap: onTap,
       child: Container(
         width: (MediaQuery.of(context).size.width / 2) - (30 + 15),
         decoration: BoxDecoration(

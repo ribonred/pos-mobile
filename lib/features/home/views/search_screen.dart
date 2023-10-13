@@ -11,24 +11,24 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainPageContainer(
-      child: Column(
-        children: [
-          const AppHeader(
-            title: 'Search Screen',
-          ),
-          Expanded(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 34),
-            child: ListView(
-              children: const [
-                Placeholder(),
-                Placeholder(),
-                Placeholder(),
-                Placeholder(),
-              ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 34),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const AppText('Search Screen'),
+            Expanded(
+              child: ListView(
+                children: const [
+                  Placeholder(),
+                  Placeholder(),
+                  Placeholder(),
+                  Placeholder(),
+                ],
+              ),
             ),
-          )),
-        ],
+          ],
+        ),
       ),
     );
   }

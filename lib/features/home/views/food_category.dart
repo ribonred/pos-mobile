@@ -28,7 +28,7 @@ class FoodCategory extends StatelessWidget {
                   //   height: 7,
                   // ),
                   AppHeader(
-                    title: 'Drink Screen',
+                    title: 'Food Screen',
                     onTapBack: () =>
                         context.read<TabBloc>().add(BackToMainMenu()),
                   ),

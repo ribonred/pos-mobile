@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:menu_barcode_apps/app/constants/images.dart';
 import 'package:menu_barcode_apps/features/home/home.dart';
 
-import '../views/tab/bloc/tab_bloc.dart';
+import '../../views/tab/bloc/tab_bloc.dart';
 
 class MenuCategoryModel {
   final String name;

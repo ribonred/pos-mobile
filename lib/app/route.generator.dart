@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menu_barcode_apps/features/home/home.dart';
 import 'package:menu_barcode_apps/features/home/views/menu_screen.dart';
+import 'package:menu_barcode_apps/features/home/views/search_screen.dart';
 
 import '../features/payment/payments.dart';
 import '../features/scan/scan.dart';
@@ -20,6 +21,9 @@ class RouterGenerator {
       case MenuScreen.route:
         return MaterialPageRoute(
             builder: (_) => const MenuScreen(), settings: settings);
+      case SearchScreen.route:
+        return MaterialPageRoute(
+            builder: (_) => const SearchScreen(), settings: settings);
       case FoodCategory.route:
         return MaterialPageRoute(
             builder: (_) => const FoodCategory(), settings: settings);
@@ -38,7 +42,6 @@ class RouterGenerator {
       case CartScreen.route:
         return MaterialPageRoute(
             builder: (_) => const CartScreen(), settings: settings);
-
       case DetailFood.route:
         return MaterialPageRoute(
             builder: (_) => const DetailFood(), settings: settings);

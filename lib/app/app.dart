@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:menu_barcode_apps/app/routes/app_route.dart';
 
 import '../features/home/home.dart';
-import 'route.generator.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -16,8 +16,8 @@ class App extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Poppins'),
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: RouterGenerator.generateRoute,
-      home: const WelcomeScreen(),
+      initialRoute: WelcomeScreen.route,
+      getPages: appPages,
     );
   }
 }

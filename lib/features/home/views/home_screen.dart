@@ -5,7 +5,7 @@ import 'package:menu_barcode_apps/features/home/widgets/bottom_tab.dart';
 import '../../../app/constants/app_colors.dart';
 
 class HomeScreen extends StatelessWidget {
-  static const String route = 'home_screen';
+  static const String route = '/home_screen';
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
   static void openAndRemoveAllRoute(BuildContext context) =>
       Navigator.pushNamedAndRemoveUntil(

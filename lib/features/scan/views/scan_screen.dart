@@ -65,7 +65,7 @@ class ScanScreen extends StatelessWidget {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(30),
                                   ),
-                                  child: getPngImage(AppImages.qrCode),
+                                  child: getPngImage(AppImages.barcode),
                                 ),
                               ],
                             ),

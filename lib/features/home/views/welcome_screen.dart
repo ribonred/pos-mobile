@@ -35,11 +35,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         children: [
           Align(
               alignment: Alignment.topRight,
-              child: getPngImage(AppImages.beefOnPlate)),
+              child: getPngImage(AppImages.beefSteak)),
           Align(
               alignment: Alignment.bottomLeft,
               child: getPngImage(
-                AppImages.bottomHomeBg,
+                AppImages.foodVector,
                 blendMode: BlendMode.srcOut,
               )),
           SafeArea(

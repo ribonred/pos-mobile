@@ -30,7 +30,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
           children: [
             Align(
                 alignment: Alignment.bottomLeft,
-                child: getPngImage(AppImages.bottomHomeBg,
+                child: getPngImage(AppImages.foodVector,
                     color: Colors.grey.withOpacity(.3))),
             Column(
               children: [

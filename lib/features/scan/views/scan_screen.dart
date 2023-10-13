@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:menu_barcode_apps/app/constants/app_text_style.dart';
 import 'package:menu_barcode_apps/app/constants/images.dart';
 import 'package:menu_barcode_apps/app/widgets/widgets.dart';
@@ -33,8 +34,7 @@ class ScanScreen extends StatelessWidget {
                               color: Colors.white,
                               size: 30,
                             ),
-                            onPressed: () =>
-                                HomeScreen.openAndRemoveAllRoute(context),
+                            onPressed: () => Get.offAllNamed(HomeScreen.route),
                             tooltip: 'Go to HomeScreen',
                           )
                         ],
@@ -75,7 +75,7 @@ class ScanScreen extends StatelessWidget {
                       AppButton(
                         margin: const EdgeInsets.fromLTRB(34, 0, 34, 50),
                         label: 'Scan Here',
-                        onTap: () => QRViewExample.open(context),
+                        onTap: () => Get.toNamed(QRViewExample.route),
                         useBorder: true,
                       ),
                     ],

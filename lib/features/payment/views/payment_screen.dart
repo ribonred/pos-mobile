@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../home/home.dart';
 
-class PaymentPage extends StatefulWidget {
+class PaymentScreen extends StatefulWidget {
   static const String route = '/payment_page';
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
-  const PaymentPage({Key? key}) : super(key: key);
+  const PaymentScreen({Key? key}) : super(key: key);
 
   @override
-  State<PaymentPage> createState() => _PaymentPageState();
+  State<PaymentScreen> createState() => _PaymentScreenState();
 }
 
 String _finalSelection = "";
 
-class _PaymentPageState extends State<PaymentPage> {
+class _PaymentScreenState extends State<PaymentScreen> {
   static List<bool> choice = [false, false, false, false, false];
 
   @override
@@ -42,7 +43,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   Icons.arrow_back_ios_new,
                   color: Colors.black,
                 ),
-                onPressed: () => CartScreen.open(context),
+                onPressed: () => Get.back(),
               ),
             ),
             body: SingleChildScrollView(

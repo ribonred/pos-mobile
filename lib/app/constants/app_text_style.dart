@@ -10,7 +10,7 @@ class AppTextStyle {
       _textStyle.copyWith(fontSize: 34, fontWeight: FontWeight.bold);
 
   static TextStyle title1 =
-      _textStyle.copyWith(fontSize: 28, fontWeight: FontWeight.w400);
+      _textStyle.copyWith(fontSize: 28, fontWeight: FontWeight.w600);
 
   static TextStyle title2 =
       _textStyle.copyWith(fontSize: 24, fontWeight: FontWeight.w400);

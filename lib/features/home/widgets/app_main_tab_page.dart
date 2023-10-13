@@ -1,43 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import '../../../app/route.generator.dart';
 import '../views/menu_screen.dart';
 import '../views/search_screen.dart';
-import '../views/tab/bloc/tab_bloc.dart';
+import '../views/tab/bottom_tab_controller.dart';
 import '../views/views.dart';
 
 class AppMainTabPage extends StatelessWidget {
   const AppMainTabPage({super.key});
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return BlocBuilder<TabBloc, TabState>(
-          buildWhen: (previous, current) =>
-              previous.selectedTab != current.selectedTab,
-          builder: (context, state) {
-            switch (state.selectedTab) {
-              case TabPage.search:
-                return _navigatorPage(SearchScreen.route);
-              case TabPage.favorite:
-                return _navigatorPage(FavoriteScreen.route);
-              case TabPage.cart:
-                return _navigatorPage(CartScreen.route);
-              case TabPage.foodMenu:
-                return _navigatorPage(FoodCategory.route);
-              case TabPage.promo:
-                return _navigatorPage(PromoCategories.route);
-              case TabPage.snack:
-                return _navigatorPage(SnackCategories.route);
-              case TabPage.drink:
-                return _navigatorPage(DrinkCategories.route);
-              default:
-                return const MenuScreen();
-            }
-          },
-        );
-      },
+    final bottomTabController = Get.put(BottomTabController());
+    return Expanded(
+      child: GetBuilder<BottomTabController>(
+        builder: (_) {
+          switch (bottomTabController.selectedTab.value) {
+            case TabPage.search:
+              return const SearchScreen();
+            case TabPage.favorite:
+              return _navigatorPage(FavoriteScreen.route);
+            case TabPage.foodMenu:
+              return _navigatorPage(FoodScreen.route);
+            case TabPage.promo:
+              return _navigatorPage(PromoScreen.route);
+            case TabPage.snack:
+              return _navigatorPage(SnackScreen.route);
+            case TabPage.drink:
+              return _navigatorPage(DrinkScreen.route);
+            case TabPage.empty:
+              return const SizedBox.shrink();
+            default:
+              return const MenuScreen();
+          }
+        },
+      ),
     );
   }
 

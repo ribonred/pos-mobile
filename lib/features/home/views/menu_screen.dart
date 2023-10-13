@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:menu_barcode_apps/app/widgets/widgets.dart';
+import 'package:menu_barcode_apps/features/home/views/tab/bottom_tab_controller.dart';
 import 'package:menu_barcode_apps/features/home/widgets/main_page_container.dart';
 
 import '../../../app/constants/app_text_style.dart';
 import '../domain/models/models.dart';
-import '../widgets/card_menu.dart';
-import 'tab/bloc/tab_bloc.dart';
+import '../widgets/category_card.dart';
 
 class MenuScreen extends StatelessWidget {
   static const String route = 'menu_screen';
@@ -36,20 +35,22 @@ class MenuScreen extends StatelessWidget {
           Expanded(
             child: GridView.count(
                 physics: const ScrollPhysics(),
-                // padding: const EdgeInsets.symmetric(vertical: 25),
+                padding: const EdgeInsets.symmetric(vertical: 25),
                 crossAxisCount: 2,
                 crossAxisSpacing: 25,
                 mainAxisSpacing: 20,
                 childAspectRatio: 0.8,
                 children: menuCategories(context)
-                    .map((e) => CardMenu(
+                    .map(
+                      (e) => CategoryCard(
                         label: e.name,
                         iconFile: e.icon,
-                        onTap: () => context
-                            .read<TabBloc>()
-                            .add(OnChangedTab(e.tabPage))))
+                        onTap: () =>
+                            BottomTabController.to.onChangedTab(e.tabPage),
+                      ),
+                    )
                     .toList()),
-          )
+          ),
         ],
       ),
     );

@@ -19,15 +19,15 @@ class MyRadioListTile<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = this.title;
-    return InkWell(
-      onTap: () => onChanged(value),
-      child: Container(
-        height: 56,
-        padding: const EdgeInsets.symmetric(horizontal: 0),
+    return Material(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(20),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
+        onTap: () => onChanged(value),
         child: Row(
           children: [
             _customRadioButton,
-            const SizedBox(width: 0),
             if (title != null) title,
           ],
         ),

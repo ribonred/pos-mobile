@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menu_barcode_apps/app/constants/app_text_style.dart';
 import 'package:menu_barcode_apps/features/home/widgets/main_page_container.dart';
 
 import '../../../app/widgets/widgets.dart';
@@ -16,7 +17,11 @@ class SearchScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const AppText('Search Screen'),
+            AppText(
+              'Search Screen',
+              style: AppTextStyle.title1,
+            ),
+            const SizedBox(height: 10),
             Expanded(
               child: ListView(
                 children: const [

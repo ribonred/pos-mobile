@@ -36,6 +36,7 @@ dependencies:
   google_fonts: ^6.1.0
   collection: ^1.17.2
   intl: ^0.18.1
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:
@@ -90,7 +91,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
-    - assets/scan/
     - assets/kategori/
     - assets/fonts/
     - assets/icons/

@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:menu_barcode_apps/app/widgets/widgets.dart';
+import 'package:menu_barcode_apps/features/home/views/tab/bottom_tab_controller.dart';
+import 'package:menu_barcode_apps/features/home/widgets/main_page_container.dart';
+
+import '../../../app/constants/app_text_style.dart';
+import '../domain/models/models.dart';
+import '../widgets/category_card.dart';
+
+class MenuScreen extends StatelessWidget {
+  static const String route = 'menu_screen';
+  static void open(BuildContext context) => Navigator.pushNamed(context, route);
+  const MenuScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final today = DateFormat("EEEEE").format(DateTime.now());
+    return MainPageContainer(
+      padding: const EdgeInsets.symmetric(horizontal: 34),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppText(
+            'Happy $today!!',
+            style: AppTextStyle.title1.copyWith(fontWeight: FontWeight.w600),
+          ),
+          AppText('What do you want to eat? ', style: AppTextStyle.body1),
+          const SizedBox(height: 15),
+          const AppTextInput(),
+          const SizedBox(height: 45),
+          AppText('Categories',
+              style:
+                  AppTextStyle.headline.copyWith(fontWeight: FontWeight.w600)),
+          Expanded(
+            child: GridView.count(
+                physics: const ScrollPhysics(),
+                padding: const EdgeInsets.symmetric(vertical: 25),
+                crossAxisCount: 2,
+                crossAxisSpacing: 25,
+                mainAxisSpacing: 20,
+                childAspectRatio: 0.8,
+                children: menuCategories(context)
+                    .map(
+                      (e) => CategoryCard(
+                        label: e.name,
+                        iconFile: e.icon,
+                        onTap: () =>
+                            BottomTabController.to.onChangedTab(e.tabPage),
+                      ),
+                    )
+                    .toList()),
+          ),
+        ],
+      ),
+    );
+  }
+}

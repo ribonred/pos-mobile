@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class AppIcons {
   static const search = 'assets/icons/search.svg';
-  static const home = 'assets/icons/cart.svg';
+  static const home = 'assets/icons/home.svg';
   static const love = 'assets/icons/love.svg';
   static const cart = 'assets/icons/cart.svg';
 }

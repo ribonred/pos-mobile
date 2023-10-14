@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get/get.dart';
 import 'package:menu_barcode_apps/app/constants/images.dart';
 
 import '../../../app/constants/app_colors.dart';
@@ -34,11 +35,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         children: [
           Align(
               alignment: Alignment.topRight,
-              child: getPngImage(AppImages.beefOnPlate)),
+              child: getPngImage(AppImages.beefSteak)),
           Align(
               alignment: Alignment.bottomLeft,
               child: getPngImage(
-                AppImages.bottomHomeBg,
+                AppImages.foodVector,
                 blendMode: BlendMode.srcOut,
               )),
           SafeArea(
@@ -72,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   margin: const EdgeInsets.fromLTRB(34, 0, 34, 50),
                   variant: AppButtonVariant.primary,
                   label: 'Scan QR Code',
-                  onTap: () => ScanScreen.open(context),
+                  onTap: () => Get.toNamed(ScanScreen.route),
                   suffixIcon: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.white,

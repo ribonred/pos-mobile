@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:menu_barcode_apps/app/constants/app_text_style.dart';
 import 'package:menu_barcode_apps/app/widgets/app_text.dart';
 
-import '../../../../app/constants/images.dart';
+import '../../../app/constants/images.dart';
 
-class CardMenu extends StatelessWidget {
+class CategoryCard extends StatelessWidget {
   final String label;
   final String iconFile;
   final VoidCallback onTap;
-  const CardMenu({
+  const CategoryCard({
     Key? key,
     required this.label,
     required this.iconFile,

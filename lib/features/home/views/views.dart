@@ -1,9 +1,9 @@
 export 'welcome_screen.dart';
 export 'home_screen.dart';
 export 'cart_screen.dart';
-export 'detail_food.dart';
-export 'drink_category.dart';
-export 'favorite_page.dart';
-export 'foot_category.dart';
-export 'promo_category.dart';
-export 'snack_category.dart';
+export 'food_detail_screen.dart';
+export 'drink_screen.dart';
+export 'favorite_screen.dart';
+export 'food_screen.dart';
+export 'promo_screen.dart';
+export 'snack_screen.dart';

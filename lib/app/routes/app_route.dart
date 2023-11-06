@@ -4,6 +4,8 @@ import 'package:menu_barcode_apps/features/home/views/search_screen.dart';
 import 'package:menu_barcode_apps/features/payment/payments.dart';
 import 'package:menu_barcode_apps/features/scan/scan.dart';
 
+import '../../features/scan/binding/qr_binding.dart';
+
 final List<GetPage> appPages = [
   GetPage(name: WelcomeScreen.route, page: () => const WelcomeScreen()),
   GetPage(name: ScanScreen.route, page: () => const ScanScreen()),
@@ -15,7 +17,10 @@ final List<GetPage> appPages = [
   GetPage(name: DrinkScreen.route, page: () => const DrinkScreen()),
   GetPage(name: PromoScreen.route, page: () => const PromoScreen()),
   GetPage(name: SnackScreen.route, page: () => const SnackScreen()),
-  GetPage(name: QRViewExample.route, page: () => const QRViewExample()),
+  GetPage(
+      name: QRViewExample.route,
+      page: () => QRViewExample(),
+      binding: QRBinding()),
   GetPage(name: PaymentScreen.route, page: () => const PaymentScreen()),
   GetPage(name: CartScreen.route, page: () => const CartScreen()),
 ];

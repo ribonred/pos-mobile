@@ -45,8 +45,7 @@ class RouterGenerator {
         return GetPageRoute(
             page: () => const FoodDetailsScreen(), settings: settings);
       case QRViewExample.route:
-        return GetPageRoute(
-            page: () => const QRViewExample(), settings: settings);
+        return GetPageRoute(page: () => QRViewExample(), settings: settings);
       case PaymentScreen.route:
         return GetPageRoute(
             page: () => const PaymentScreen(), settings: settings);

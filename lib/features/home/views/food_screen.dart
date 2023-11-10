@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:menu_barcode_apps/features/home/home.dart';
 
 import '../../../app/widgets/widgets.dart';
 import '../../../core/widgets/menu_card.dart';
+import '../home.dart';
 import 'tab/bottom_tab_controller.dart';
 
 class FoodScreen extends StatelessWidget {
@@ -12,19 +12,22 @@ class FoodScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final BottomTabController c = Get.find();
+
     return GetBuilder<BottomTabController>(
       builder: (_) {
         return WillPopScope(
           onWillPop: () async {
-            BottomTabController.to.backToMenu();
+            c.backToMenu();
             return false;
           },
           child: MainPageContainer(
             child: Column(
               children: [
                 AppHeader(
-                    title: 'Food Screen',
-                    onTapBack: () => BottomTabController.to.backToMenu()),
+                  title: 'Food Screen',
+                  onTapBack: () => c.backToMenu(),
+                ),
                 const AppTextInput(
                   margin: EdgeInsets.fromLTRB(34, 20, 34, 20),
                 ),

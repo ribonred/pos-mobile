@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:menu_barcode_apps/app/views/unknown_route_page.dart';
-import 'package:menu_barcode_apps/features/home/home.dart';
-import 'package:menu_barcode_apps/features/home/views/menu_screen.dart';
-import 'package:menu_barcode_apps/features/home/views/search_screen.dart';
 
+import '../features/home/home.dart';
+import '../features/home/views/menu_screen.dart';
+import '../features/home/views/search_screen.dart';
 import '../features/payment/payments.dart';
 import '../features/scan/scan.dart';
+import 'views/unknown_route_page.dart';
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -14,7 +14,7 @@ class RouterGenerator {
       case WelcomeScreen.route:
         return GetPageRoute(routeName: WelcomeScreen.route, settings: settings);
       case ScanScreen.route:
-        return GetPageRoute(page: () => const ScanScreen(), settings: settings);
+        return GetPageRoute(page: () => ScanScreen(), settings: settings);
       case HomeScreen.route:
         return GetPageRoute(page: () => const HomeScreen(), settings: settings);
       case MenuScreen.route:

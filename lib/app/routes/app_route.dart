@@ -1,14 +1,18 @@
 import 'package:get/get.dart';
-import 'package:menu_barcode_apps/features/home/home.dart';
-import 'package:menu_barcode_apps/features/home/views/search_screen.dart';
-import 'package:menu_barcode_apps/features/payment/payments.dart';
-import 'package:menu_barcode_apps/features/scan/scan.dart';
 
+import '../../features/home/home.dart';
+import '../../features/home/views/search_screen.dart';
+import '../../features/payment/payments.dart';
 import '../../features/scan/binding/qr_binding.dart';
+import '../../features/scan/scan.dart';
 
 final List<GetPage> appPages = [
   GetPage(name: WelcomeScreen.route, page: () => const WelcomeScreen()),
-  GetPage(name: ScanScreen.route, page: () => const ScanScreen()),
+  GetPage(
+    name: ScanScreen.route,
+    page: () => ScanScreen(),
+    binding: QRBinding(),
+  ),
   GetPage(name: HomeScreen.route, page: () => const HomeScreen()),
   GetPage(name: SearchScreen.route, page: () => const SearchScreen()),
   GetPage(name: FavoriteScreen.route, page: () => const FavoriteScreen()),

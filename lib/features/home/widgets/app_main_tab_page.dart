@@ -12,29 +12,30 @@ class AppMainTabPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bottomTabController = Get.put(BottomTabController());
-    return Expanded(
-      child: GetBuilder<BottomTabController>(
-        builder: (_) {
-          switch (bottomTabController.selectedTab.value) {
-            case TabPage.search:
-              return const SearchScreen();
-            case TabPage.favorite:
-              return _navigatorPage(FavoriteScreen.route);
-            case TabPage.foodMenu:
-              return _navigatorPage(FoodScreen.route);
-            case TabPage.promo:
-              return _navigatorPage(PromoScreen.route);
-            case TabPage.snack:
-              return _navigatorPage(SnackScreen.route);
-            case TabPage.drink:
-              return _navigatorPage(DrinkScreen.route);
-            case TabPage.empty:
-              return const SizedBox.shrink();
-            default:
-              return const MenuScreen();
-          }
-        },
-      ),
+
+    return GetBuilder<BottomTabController>(
+      builder: (_) {
+        switch (bottomTabController.selectedTab.value) {
+          case TabPage.search:
+            return _navigatorPage(SearchScreen.route);
+          case TabPage.favorite:
+            return _navigatorPage(FavoriteScreen.route);
+          case TabPage.cart:
+            return _navigatorPage(CartScreen.route);
+          case TabPage.foodMenu:
+            return _navigatorPage(FoodScreen.route);
+          case TabPage.promo:
+            return _navigatorPage(PromoScreen.route);
+          case TabPage.snack:
+            return _navigatorPage(SnackScreen.route);
+          case TabPage.drink:
+            return _navigatorPage(DrinkScreen.route);
+          case TabPage.empty:
+            return const SizedBox.shrink();
+          default:
+            return _navigatorPage(MenuScreen.route);
+        }
+      },
     );
   }
 

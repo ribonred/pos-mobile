@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'pages/pages.dart';
+import 'utils/colors.dart';
 
 class POSApp extends StatelessWidget {
   const POSApp({super.key});
@@ -18,12 +19,12 @@ class POSApp extends StatelessWidget {
       title: 'POS App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryOrange),
         fontFamily: 'Poppins',
         useMaterial3: true,
       ),
       getPages: appPages,
-      initialRoute: WelcomePage.routeName,
+      initialRoute: HomePage.routeName,
     );
   }
 }

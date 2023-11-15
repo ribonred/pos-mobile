@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 
-import '../../providers/pos_api.dart';
+import '../../controllers/controllers.dart';
 import 'controller.dart';
 
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => POSAPIProvider());
+    Get.lazyPut(() => POSMenuController(), fenix: true);
     Get.put(HomeController());
   }
 }

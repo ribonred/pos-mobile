@@ -105,7 +105,7 @@ class Menu {
     required this.inStock,
     required this.code,
     required this.merchant,
-    required this.parent,
+    this.parent,
     required this.category,
   });
 

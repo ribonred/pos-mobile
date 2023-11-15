@@ -15,6 +15,7 @@ class POSAPIProvider extends GetConnect {
       {'qrdata': qrData},
     );
     if (response.statusCode != 200) {
+      Get.log(response.body.toString());
       return null;
     }
 
@@ -30,6 +31,7 @@ class POSAPIProvider extends GetConnect {
   Future<List<Menu>?> getMenu(String merchantId) async {
     Response response = await get('/api/v1/merchant/menu/$merchantId/');
     if (response.statusCode != 200) {
+      Get.log(response.body.toString());
       return null;
     }
 

@@ -18,6 +18,14 @@ class Spacing extends StatelessWidget {
       : hspace = 0.0,
         vspace = 24.0;
 
+  const Spacing.xlarge({super.key})
+      : hspace = 0.0,
+        vspace = 32.0;
+
+  const Spacing.xxlarge({super.key})
+      : hspace = 0.0,
+        vspace = 48.0;
+
   const Spacing.horizontal({super.key})
       : hspace = 16.0,
         vspace = 0.0;

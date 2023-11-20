@@ -5,6 +5,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import '../../components/components.dart';
 import '../../utils/asset_images.dart';
 import '../../utils/colors.dart';
+import '../pages.dart';
 import 'controller.dart';
 
 class QRScanPage extends GetView<QRScanController> {
@@ -39,14 +40,6 @@ class QRScanPage extends GetView<QRScanController> {
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       color: Colors.white,
                     ),
-              ),
-              const Spacing.small(),
-              Text(
-                "Please move the camera\nover another device's screen",
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
-                textAlign: TextAlign.center,
               ),
             ],
           ),
@@ -84,8 +77,78 @@ class QRScanPage extends GetView<QRScanController> {
               ),
             ),
           ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: _messageWidgetBuilder(context),
+            ),
+          )
         ],
       ),
+    );
+  }
+
+  Widget _messageWidgetBuilder(BuildContext context) {
+    return GetX<QRScanController>(
+      builder: (QRScanController controller) {
+        String qrData = controller.qrData.value;
+        String merchantId = controller.merchantId.value;
+        bool isLoading = controller.isLoading.value;
+
+        bool isStarting = qrData.isEmpty && merchantId.isEmpty;
+        bool isQRFound = qrData.isNotEmpty && !isLoading;
+        bool merchantFound = merchantId.isNotEmpty && !isLoading;
+
+        String message = '';
+        if (isStarting) {
+          message = 'Please move the camera\nover another device\'s screen';
+        } else if (isQRFound) {
+          message = 'QR code found, getting merchant information...';
+        } else if (!merchantFound) {
+          message = 'Merchant cannot be found...';
+        }
+
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (!isQRFound || !merchantFound)
+              Text(
+                message,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.white,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+            if (qrData.isNotEmpty && merchantId.isNotEmpty && !isLoading)
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: Colors.white),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                    vertical: 20.0,
+                  ),
+                  foregroundColor: Colors.white,
+                  textStyle: Theme.of(context).textTheme.headlineMedium,
+                ),
+                onPressed: () {
+                  Get.offAllNamed(
+                    HomePage.routeName,
+                    arguments: {'merchantId': merchantId},
+                  );
+                },
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Continue"),
+                    Spacing.horizontal(),
+                    Icon(Icons.arrow_forward_ios),
+                  ],
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 }

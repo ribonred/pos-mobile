@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -6,20 +5,28 @@ import 'package:get/get.dart';
 import '../../components/components.dart';
 import '../../controllers/controllers.dart';
 import '../../models/pos_responses.dart';
+import '../../utils/asset_images.dart';
 import '../../utils/colors.dart';
+import '../pages.dart';
 
 class CategoryPage extends GetView<POSMenuController> {
-  static const String routeName = '/menu/:category';
+  static const String routeName = '/menu';
 
   const CategoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    String category = Get.parameters['category'] ?? 'Food';
+    String category = Get.arguments?['category'] ?? 'Food';
 
     return Scaffold(
       body: GetBuilder<POSMenuController>(
         builder: (context) {
+          if (controller.menu == null) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
           List<Menu> menus = controller.menu!
               .where((menu) => menu.category.contains(category))
               .toList();
@@ -29,7 +36,7 @@ class CategoryPage extends GetView<POSMenuController> {
           }
 
           return Padding(
-            padding: const EdgeInsets.all(32.0),
+            padding: const EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -53,6 +60,7 @@ class CategoryPage extends GetView<POSMenuController> {
                       return _buildCategoryItem(context, menu: menus[index]);
                     },
                   ),
+                  const Spacing.xlarge(),
                 ],
               ),
             ),
@@ -65,107 +73,103 @@ class CategoryPage extends GetView<POSMenuController> {
   Widget _buildCategoryItem(BuildContext context, {required Menu menu}) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16.0),
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 6.0,
-              offset: const Offset(0, 2),
-              color: Colors.black.withOpacity(.2),
-            ),
-          ],
+      child: InkWell(
+        onTap: () => Get.toNamed(
+          MenuPage.routeName,
+          arguments: {
+            'menuId': menu.id,
+          },
         ),
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16.0),
-                    child: CachedNetworkImage(
-                      imageUrl: 'https://picsum.photos/300/200',
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              value: downloadProgress.progress,
-                            ),
-                          ),
-                        );
-                      },
-                      errorWidget: (context, url, error) {
-                        return const Icon(Icons.error);
-                      },
-                      width: double.infinity,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16.0),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 6.0,
+                offset: const Offset(0, 2),
+                color: Colors.black.withOpacity(.2),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16.0),
+                      child: Container(
+                        color: AppColors.secondaryOrange,
+                        width: double.infinity,
+                        height: 120.0,
+                        child: Image.asset(AssetImages.foodIcon),
+                      ),
                     ),
                   ),
-                ),
-                Positioned(
-                  bottom: 0.0,
-                  right: 8.0,
-                  child: FloatingActionButton.small(
-                    shape: const CircleBorder(),
-                    backgroundColor: Colors.white,
-                    heroTag: '${menu.merchant}${menu.code}',
-                    onPressed: () {},
-                    child: const Icon(Icons.favorite_outline),
-                  ),
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    menu.name,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(fontWeight: FontWeight.w600),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            4.0.toString(),
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                          const Icon(
-                            Icons.star,
-                            size: 12.0,
-                            color: AppColors.primaryOrange,
-                          ),
-                        ],
-                      ),
-                      Text.rich(
-                        TextSpan(
-                          text: 'Rp. ',
+                  Positioned(
+                    bottom: 0.0,
+                    right: 8.0,
+                    child: FloatingActionButton.small(
+                      shape: const CircleBorder(),
+                      backgroundColor: Colors.white,
+                      heroTag: '${menu.merchant}${menu.code}',
+                      onPressed: () {},
+                      child: const Icon(Icons.favorite_outline),
+                    ),
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      menu.name,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontWeight: FontWeight.w600),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
                           children: [
-                            TextSpan(
-                              text: menu.priceDisplay.split('Rp ')[1],
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                              ),
+                            Text(
+                              5.0.toString(),
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            const Icon(
+                              Icons.star,
+                              size: 12.0,
+                              color: AppColors.primaryOrange,
                             ),
                           ],
                         ),
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
-                ],
+                        Text.rich(
+                          TextSpan(
+                            text: 'Rp. ',
+                            children: [
+                              TextSpan(
+                                text: menu.priceDisplay.split('Rp')[1],
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -40,11 +40,11 @@ class HomePage extends GetView<HomeController> {
 
     return GetX<HomeController>(
       initState: (state) {
-        String? qrData = Get.arguments?['qrData'];
+        String? merchantId = Get.arguments?['merchantId'];
 
-        if (qrData != null) {
-          menuController.getMenu(qrData);
-          controller.db.settings.put('qrData', qrData);
+        if (merchantId != null) {
+          menuController.getMenu(merchantId);
+          controller.db.settings.put('merchantId', merchantId);
         }
       },
       builder: (controller) {
@@ -67,7 +67,7 @@ class HomePage extends GetView<HomeController> {
                   32.0,
                   MediaQuery.of(context).viewPadding.top + 32.0,
                   32.0,
-                  32.0,
+                  0.0,
                 ),
                 child: AnimatedSwitcher(
                   child: tabItems[controller.currentIndex.value]['tab'],

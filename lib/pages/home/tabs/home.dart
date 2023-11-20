@@ -52,7 +52,10 @@ class HomeTab extends GetView<POSMenuController> {
                   (e) => _buildCategoryCard(
                     label: e['name'],
                     iconFile: e['icon'],
-                    onTap: () => Get.toNamed('/menu/${e['category']}'),
+                    onTap: () => Get.toNamed(
+                      '/menu',
+                      arguments: {'category': e['category']},
+                    ),
                   ),
                 )
                 .toList(),

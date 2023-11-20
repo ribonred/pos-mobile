@@ -1,12 +1,18 @@
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-import '../pages.dart';
+import '../../models/pos_responses.dart';
+import '../../providers/pos_api.dart';
 
 class QRScanController extends GetxController {
+  final POSAPIProvider api = Get.find();
   final MobileScannerController cameraController = MobileScannerController(
     autoStart: false,
   );
+
+  final RxString qrData = ''.obs;
+  final RxString merchantId = ''.obs;
+  final RxBool isLoading = false.obs;
 
   @override
   void onInit() {
@@ -19,11 +25,20 @@ class QRScanController extends GetxController {
     cameraController.stop();
 
     Barcode barcode = result.barcodes.first;
-    String? qrData = barcode.rawValue;
-    if (qrData == null) {
+    if (barcode.rawValue == null) {
       return;
     }
 
-    Get.offAllNamed(HomePage.routeName, arguments: {'qrData': qrData});
+    qrData.value = barcode.rawValue!;
+
+    isLoading.value = true;
+    QRResponse? response = await api.translateQR(qrData.value);
+    if (response == null) {
+      isLoading.value = false;
+      return;
+    }
+
+    merchantId.value = response.data.merchantId;
+    isLoading.value = false;
   }
 }

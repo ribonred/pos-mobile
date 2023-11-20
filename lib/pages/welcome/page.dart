@@ -66,7 +66,7 @@ class WelcomePage extends StatelessWidget {
                     backgroundColor: AppColors.primaryOrange,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 20,
-                      vertical: 10,
+                      vertical: 20,
                     ),
                     foregroundColor: Colors.white,
                     textStyle: Theme.of(context).textTheme.headlineMedium,

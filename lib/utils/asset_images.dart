@@ -6,4 +6,6 @@ class AssetImages {
   static const favIcon = 'assets/images/fav_icon.png';
   static const drinkIcon = 'assets/images/drink_icon.png';
   static const snackIcon = 'assets/images/snack_icon.png';
+  static const plusIcon = 'assets/images/plus_button.png';
+  static const minusIcon = 'assets/images/minus_button.png';
 }

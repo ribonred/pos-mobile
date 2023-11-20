@@ -14,7 +14,7 @@ class POSAPIProvider extends GetConnect {
       '/api/v1/merchant/menu/',
       {'qrdata': qrData},
     );
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       Get.log(response.body.toString());
       return null;
     }

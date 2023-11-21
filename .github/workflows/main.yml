@@ -35,7 +35,7 @@ jobs:
         with:
           name: release-apks
           path: "build/app/outputs/apk/release/"
-      - uses: Shopify/upload-to-release@v1
+      - uses: Shopify/upload-to-release@v2.0.0
         with:
           name: APK files
           path: "build/app/outputs/apk/release/"

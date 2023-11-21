@@ -31,7 +31,12 @@ jobs:
         run: flutter pub get
       - name: Build APK
         run: flutter build apk --split-per-abi --obfuscate --split-debug-info --release
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: release-apks
           path: "build/app/outputs/apk/release/"
+      - uses: Shopify/upload-to-release@v1
+        with:
+          name: APK files
+          path: "build/app/outputs/apk/release/"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

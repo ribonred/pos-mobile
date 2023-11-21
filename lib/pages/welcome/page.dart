@@ -61,25 +61,12 @@ class WelcomePage extends StatelessWidget {
               width: double.infinity,
               child: Hero(
                 tag: 'scan-text',
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryOrange,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
-                    ),
-                    foregroundColor: Colors.white,
-                    textStyle: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  onPressed: () => Get.toNamed(QRScanPage.routeName),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Scan QR Code"),
-                      Spacing.horizontal(),
-                      Icon(Icons.arrow_forward_ios),
-                    ],
-                  ),
+                child: AppButton(
+                  label: 'Scan QR Code',
+                  trailing: const Icon(Icons.arrow_forward_ios),
+                  onPressed: () {
+                    Get.toNamed(QRScanPage.routeName);
+                  },
                 ),
               ),
             ),

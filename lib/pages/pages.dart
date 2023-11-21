@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
 
 // import '../middlewares/middlewares.dart';
+import 'cart/cart.dart';
 import 'category/category.dart';
 import 'home/home.dart';
 import 'menu/menu.dart';
 import 'qr_scan/qr_scan.dart';
 import 'welcome/welcome.dart';
 
+export 'cart/cart.dart';
 export 'category/category.dart';
 export 'home/home.dart';
 export 'menu/menu.dart';
@@ -36,5 +38,9 @@ List<GetPage> appPages = [
   GetPage(
     name: MenuPage.routeName,
     page: () => const MenuPage(),
+  ),
+  GetPage(
+    name: CartPage.routeName,
+    page: () => const CartPage(),
   ),
 ];

@@ -51,7 +51,7 @@ class CartPage extends StatelessWidget {
                     CartItem(
                       name: 'Beef Burger',
                       price: 120000,
-                      score: 4.9,
+                      rating: 4.9,
                       qty: 1,
                       onQtyChanged: (value) {},
                       onRemove: () {},
@@ -60,7 +60,7 @@ class CartPage extends StatelessWidget {
                     CartItem(
                       name: 'Rice with chicken',
                       price: 24000,
-                      score: 4.4,
+                      rating: 4.4,
                       qty: 1,
                       onQtyChanged: (value) {},
                       onRemove: () {},
@@ -85,20 +85,7 @@ class CartPage extends StatelessWidget {
                               'Subtotal',
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
-                            Text.rich(
-                              const TextSpan(
-                                text: 'Rp. ',
-                                children: [
-                                  TextSpan(
-                                    text: '120.000',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
+                            const Price(120000),
                           ],
                         ),
                         const Spacing(),
@@ -109,20 +96,7 @@ class CartPage extends StatelessWidget {
                               'Tax',
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
-                            Text.rich(
-                              const TextSpan(
-                                text: 'Rp. ',
-                                children: [
-                                  TextSpan(
-                                    text: '12.000',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
+                            const Price(12000),
                           ],
                         ),
                       ]),
@@ -143,20 +117,7 @@ class CartPage extends StatelessWidget {
                                 'Total',
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
-                              Text.rich(
-                                const TextSpan(
-                                  text: 'Rp. ',
-                                  children: [
-                                    TextSpan(
-                                      text: '132.000',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                style: Theme.of(context).textTheme.titleLarge,
-                              ),
+                              const Price(132000),
                             ],
                           ),
                           const Spacing(),
@@ -181,7 +142,7 @@ class CartPage extends StatelessWidget {
 class CartItem extends StatelessWidget {
   final String name;
   final int price;
-  final double score;
+  final double rating;
   final int qty;
   final void Function(int value) onQtyChanged;
   final VoidCallback onRemove;
@@ -190,7 +151,7 @@ class CartItem extends StatelessWidget {
     super.key,
     required this.name,
     required this.price,
-    required this.score,
+    required this.rating,
     required this.qty,
     required this.onQtyChanged,
     required this.onRemove,
@@ -243,34 +204,12 @@ class CartItem extends StatelessWidget {
                       const Spacing.xsmall(),
                       Row(
                         children: [
-                          Text.rich(
-                            TextSpan(
-                              text: 'Rp. ',
-                              children: [
-                                TextSpan(
-                                  text: price.toString(),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
+                          Price(
+                            price,
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                           const Spacing.horizontal(),
-                          Row(
-                            children: [
-                              Text(
-                                score.toString(),
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                              const Icon(
-                                Icons.star,
-                                size: 12.0,
-                                color: AppColors.primaryOrange,
-                              ),
-                            ],
-                          ),
+                          Rating(rating, size: 14.0),
                         ],
                       ),
                     ],
@@ -281,34 +220,12 @@ class CartItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Row(
-                        children: [
-                          IconButton(
-                            onPressed: () => onQtyChanged(qty - 1),
-                            icon: const Icon(
-                              Icons.remove_circle_outline,
-                              color: AppColors.primaryOrange,
-                            ),
-                          ),
-                          const Spacing.horizontalSmall(),
-                          Text(
-                            qty.toString(),
-                            style:
-                                Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.primaryOrange,
-                                    ),
-                          ),
-                          const Spacing.horizontalSmall(),
-                          IconButton(
-                            onPressed: () => onQtyChanged(qty + 1),
-                            icon: const Icon(
-                              Icons.add_circle_outline,
-                              color: AppColors.primaryOrange,
-                            ),
-                          ),
-                        ],
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Quantity(
+                        quantity: qty,
+                        onChanged: onQtyChanged,
+                        size: 18.0,
+                        withContainer: false,
                       ),
                     ),
                     ClipRRect(

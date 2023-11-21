@@ -126,83 +126,18 @@ class MenuPage extends StatelessWidget {
                                   ?.copyWith(fontWeight: FontWeight.w600),
                             ),
                           ),
-                          const Spacing.small(),
-                          Row(
-                            children: [
-                              Text(
-                                5.0.toString(),
-                                style: Theme.of(context).textTheme.titleLarge,
-                              ),
-                              const Icon(
-                                Icons.star,
-                                color: AppColors.primaryOrange,
-                              ),
-                            ],
-                          ),
+                          const Spacing.xsmall(),
+                          const Rating(5.0, size: 18.0),
                           const Spacing(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text.rich(
-                                TextSpan(
-                                  text: 'Rp. ',
-                                  children: [
-                                    TextSpan(
-                                      text: menu.priceDisplay.split('Rp')[1],
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                              Price(
+                                menu.price,
                                 style:
-                                    Theme.of(context).textTheme.headlineMedium,
+                                    Theme.of(context).textTheme.headlineLarge,
                               ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(64.0),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 6.0,
-                                      offset: const Offset(0, 2),
-                                      color: Colors.black.withOpacity(.2),
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Icons.remove_circle_outline,
-                                        size: 32.0,
-                                        color: AppColors.primaryOrange,
-                                      ),
-                                    ),
-                                    const Spacing.horizontal(),
-                                    Text(
-                                      1.toString(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineMedium
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: AppColors.primaryOrange,
-                                          ),
-                                    ),
-                                    const Spacing.horizontal(),
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Icons.add_circle_outline,
-                                        size: 32.0,
-                                        color: AppColors.primaryOrange,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              Quantity(quantity: 1, onChanged: (_) {}),
                             ],
                           ),
                           const Spacing.small(),

@@ -133,35 +133,14 @@ class CategoryPage extends GetView<POSMenuController> {
                           .titleMedium
                           ?.copyWith(fontWeight: FontWeight.w600),
                     ),
+                    const Spacing.xsmall(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              5.0.toString(),
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                            const Icon(
-                              Icons.star,
-                              size: 12.0,
-                              color: AppColors.primaryOrange,
-                            ),
-                          ],
-                        ),
-                        Text.rich(
-                          TextSpan(
-                            text: 'Rp. ',
-                            children: [
-                              TextSpan(
-                                text: menu.priceDisplay.split('Rp')[1],
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                          style: Theme.of(context).textTheme.bodySmall,
+                        const Rating(4.8, size: 14.0),
+                        Price(
+                          menu.price,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
                     ),

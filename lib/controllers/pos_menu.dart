@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../models/pos_responses.dart';
+import '../models/models.dart';
 import '../providers/pos_api.dart';
 
 class POSMenuController extends GetxController {

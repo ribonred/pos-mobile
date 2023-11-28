@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 
 import '../../components/components.dart';
 import '../../controllers/controllers.dart';
-import '../../models/pos_responses.dart';
+import '../../models/models.dart';
 import '../../utils/asset_images.dart';
 import '../../utils/colors.dart';
-import '../pages.dart';
+import 'menu.dart';
 
-class MenuPage extends StatelessWidget {
+class MenuPage extends GetView<MenuItemController> {
   static const String routeName = '/menu/:menuId';
 
   const MenuPage({super.key});
@@ -28,31 +28,7 @@ class MenuPage extends StatelessWidget {
           bool menuNotFound = menu == null;
 
           if (menuEmpty || menuNotFound) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(
-                      Icons.question_mark_rounded,
-                      size: 120.0,
-                      color: Colors.grey,
-                    ),
-                    Text(
-                      'Menu not found',
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    const Spacing(),
-                    AppButton(
-                      onPressed: () => Get.back(),
-                      label: 'Back',
-                      outlined: true,
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return const MenuNotFound();
           }
 
           return Column(
@@ -112,92 +88,139 @@ class MenuPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 32.0),
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              menu.name,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayMedium
-                                  ?.copyWith(fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                          const Spacing.xsmall(),
-                          const Rating(5.0, size: 18.0),
-                          const Spacing(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Price(
-                                menu.price,
-                                style:
-                                    Theme.of(context).textTheme.headlineLarge,
-                              ),
-                              Quantity(quantity: 1, onChanged: (_) {}),
-                            ],
-                          ),
-                          const Spacing.small(),
-                          Expanded(
-                            child: ListView(
-                              children: [
-                                Text(
-                                  "About",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                ),
-                                const Spacing.small(),
-                                Text(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                ),
-                                const Spacing(),
-                                Text(
-                                  "Extra",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                ),
-                                const Spacing.small(),
-                                Wrap(
-                                  spacing: 8.0,
-                                  // runSpacing: 8.0,
-                                  children: [
-                                    AppChip(label: 'cheese', onSelected: () {}),
-                                    AppChip(label: 'cream', onSelected: () {}),
-                                    AppChip(
-                                      selected: true,
-                                      label: 'chocolate',
-                                      onSelected: () {},
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          AppButton(
-                            onPressed: () => Get.toNamed(CartPage.routeName),
-                            label: 'Add to cart',
-                          ),
-                        ],
-                      ),
-                    ),
+                    MenuInfo(menu: menu),
                   ],
                 ),
               ),
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class MenuInfo extends StatelessWidget {
+  final Menu menu;
+
+  const MenuInfo({
+    super.key,
+    required this.menu,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final MenuItemController controller = Get.find();
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 32.0),
+      child: Column(
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              menu.name,
+              style: Theme.of(context)
+                  .textTheme
+                  .displayMedium
+                  ?.copyWith(fontWeight: FontWeight.w600),
+            ),
+          ),
+          const Spacing.xsmall(),
+          const Rating(5.0, size: 18.0),
+          const Spacing(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Price(
+                menu.price,
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+              GetBuilder<MenuItemController>(builder: (controller) {
+                return Quantity(
+                  quantity: controller.qty,
+                  onChanged: controller.updateQty,
+                );
+              }),
+            ],
+          ),
+          const Spacing.small(),
+          Expanded(
+            child: ListView(
+              children: [
+                Text(
+                  "About",
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                const Spacing.small(),
+                Text(
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const Spacing(),
+                Text(
+                  "Extra",
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                const Spacing.small(),
+                Wrap(
+                  spacing: 8.0,
+                  // runSpacing: 8.0,
+                  children: [
+                    AppChip(label: 'cheese', onSelected: () {}),
+                    AppChip(label: 'cream', onSelected: () {}),
+                    AppChip(
+                      selected: true,
+                      label: 'chocolate',
+                      onSelected: () {},
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          AppButton(
+            onPressed: () => controller.addToCart(menu),
+            label: 'Add to cart',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MenuNotFound extends StatelessWidget {
+  const MenuNotFound({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.question_mark_rounded,
+              size: 120.0,
+              color: Colors.grey,
+            ),
+            Text(
+              'Menu not found',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const Spacing(),
+            AppButton(
+              onPressed: () => Get.back(),
+              label: 'Back',
+              outlined: true,
+            ),
+          ],
+        ),
       ),
     );
   }

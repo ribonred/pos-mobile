@@ -6,7 +6,6 @@ import '../../components/components.dart';
 import '../../utils/asset_images.dart';
 import '../../utils/colors.dart';
 import '../pages.dart';
-import 'controller.dart';
 
 class QRScanPage extends GetView<QRScanController> {
   static const String routeName = '/qr_scan';
@@ -93,26 +92,26 @@ class QRScanPage extends GetView<QRScanController> {
     return GetX<QRScanController>(
       builder: (QRScanController controller) {
         String qrData = controller.qrData.value;
-        String merchantId = controller.merchantId.value;
+        bool hasSessionData = controller.hasSessionData.value;
         bool isLoading = controller.isLoading.value;
 
-        bool isStarting = qrData.isEmpty && merchantId.isEmpty;
+        bool isStarting = qrData.isEmpty && !hasSessionData;
         bool isQRFound = qrData.isNotEmpty && !isLoading;
-        bool merchantFound = merchantId.isNotEmpty && !isLoading;
+        bool sessionStarted = hasSessionData && !isLoading;
 
         String message = '';
         if (isStarting) {
           message = 'Please move the camera\nover another device\'s screen';
         } else if (isQRFound) {
           message = 'QR code found, getting merchant information...';
-        } else if (!merchantFound) {
+        } else if (!sessionStarted) {
           message = 'Merchant cannot be found...';
         }
 
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (!isQRFound || !merchantFound)
+            if (!isQRFound || !sessionStarted)
               Text(
                 message,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -120,7 +119,7 @@ class QRScanPage extends GetView<QRScanController> {
                     ),
                 textAlign: TextAlign.center,
               ),
-            if (qrData.isNotEmpty && merchantId.isNotEmpty && !isLoading)
+            if (qrData.isNotEmpty && hasSessionData && !isLoading)
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: Colors.white),
@@ -131,12 +130,7 @@ class QRScanPage extends GetView<QRScanController> {
                   foregroundColor: Colors.white,
                   textStyle: Theme.of(context).textTheme.headlineMedium,
                 ),
-                onPressed: () {
-                  Get.offAllNamed(
-                    HomePage.routeName,
-                    arguments: {'merchantId': merchantId},
-                  );
-                },
+                onPressed: () => Get.offAllNamed(HomePage.routeName),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

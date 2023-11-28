@@ -9,8 +9,14 @@ class SessionMiddleware extends GetMiddleware {
 
   @override
   RouteSettings? redirect(String? route) {
-    return db.settings.get('qrData') == null
-        ? const RouteSettings(name: WelcomePage.routeName)
+    String? sessionId = db.session.get('sessionId');
+    String? merchantId = db.session.get('merchantId');
+
+    bool hasSessionId = sessionId != null && sessionId != '';
+    bool hasMerchantId = merchantId != null && merchantId != '';
+
+    return hasSessionId && hasMerchantId
+        ? const RouteSettings(name: HomePage.routeName)
         : null;
   }
 }

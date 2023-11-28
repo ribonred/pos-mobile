@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../components/components.dart';
+import '../../models/models.dart';
 import '../../utils/asset_images.dart';
 import '../../utils/colors.dart';
+import 'controller.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends GetView<CartController> {
   static const String routeName = '/cart';
 
   const CartPage({super.key});
@@ -44,104 +47,154 @@ class CartPage extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.all(32.0),
-                  children: [
-                    CartItem(
-                      name: 'Beef Burger',
-                      price: 120000,
-                      rating: 4.9,
-                      qty: 1,
-                      onQtyChanged: (value) {},
-                      onRemove: () {},
-                    ),
-                    const Spacing(),
-                    CartItem(
-                      name: 'Rice with chicken',
-                      price: 24000,
-                      rating: 4.4,
-                      qty: 1,
-                      onQtyChanged: (value) {},
-                      onRemove: () {},
-                    )
-                  ],
+                child: GetBuilder<CartController>(
+                  initState: (state) => controller.refreshItems(),
+                  builder: (controller) {
+                    return controller.channel != null
+                        ? _buildStreamingList(controller)
+                        : _buildList(controller);
+                  },
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: AppColors.lightGray,
-                  borderRadius: BorderRadius.circular(32.0),
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(32.0),
-                      child: Column(children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Subtotal',
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                            const Price(120000),
-                          ],
-                        ),
-                        const Spacing(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Tax',
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                            const Price(12000),
-                          ],
-                        ),
-                      ]),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(32.0),
-                      ),
-                      padding: const EdgeInsets.all(32.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Total',
-                                style: Theme.of(context).textTheme.titleLarge,
-                              ),
-                              const Price(132000),
-                            ],
-                          ),
-                          const Spacing(),
-                          AppButton(
-                            onPressed: () {},
-                            label: 'Checkout',
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              _buildTotals(context),
             ],
           ),
         ],
       ),
     );
   }
+
+  Container _buildTotals(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        borderRadius: BorderRadius.circular(32.0),
+      ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Subtotal',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  GetBuilder<CartController>(builder: (context) {
+                    return Price(controller.total);
+                  }),
+                ],
+              ),
+              const Spacing(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Tax',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const Price(0),
+                ],
+              ),
+            ]),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(32.0),
+            ),
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Total',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    GetBuilder<CartController>(builder: (context) {
+                      return Price(controller.total);
+                    }),
+                  ],
+                ),
+                const Spacing(),
+                AppButton(
+                  onPressed: () {},
+                  label: 'Checkout',
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStreamingList(CartController controller) {
+    return StreamBuilder(
+      stream: controller.channel?.stream,
+      builder: (context, snapshot) {
+        return ListView(
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.all(32.0),
+          children: [
+            CartItem(
+              name: 'Beef Burger',
+              price: '120000',
+              rating: 4.9,
+              qty: 1,
+              onQtyChanged: (value) {},
+              onRemove: () {},
+            ),
+            const Spacing(),
+            CartItem(
+              name: 'Rice with chicken',
+              price: '24000',
+              rating: 4.4,
+              qty: 1,
+              onQtyChanged: (value) {},
+              onRemove: () {},
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildList(CartController controller) {
+    if (controller.items.isEmpty) {
+      return const Center(
+        child: Text('No orders yet, go order something!'),
+      );
+    }
+
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.all(32.0),
+      itemCount: controller.items.length,
+      itemBuilder: (context, index) {
+        OrderItem item = controller.items[index];
+
+        return CartItem(
+          name: item.productName,
+          price: item.price,
+          rating: 5.0,
+          qty: item.quantity,
+          onQtyChanged: (value) => controller.updateItemCount(item.id, value),
+          onRemove: () => controller.deleteItem(item.id),
+        );
+      },
+    );
+  }
 }
 
 class CartItem extends StatelessWidget {
   final String name;
-  final int price;
+  final String price;
   final double rating;
   final int qty;
   final void Function(int value) onQtyChanged;

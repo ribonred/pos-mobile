@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-// import '../middlewares/middlewares.dart';
+import '../middlewares/middlewares.dart';
 import 'cart/cart.dart';
 import 'category/category.dart';
 import 'home/home.dart';
@@ -19,6 +19,7 @@ List<GetPage> appPages = [
   GetPage(
     name: WelcomePage.routeName,
     page: () => const WelcomePage(),
+    middlewares: [SessionMiddleware()],
   ),
   GetPage(
     name: QRScanPage.routeName,
@@ -29,7 +30,6 @@ List<GetPage> appPages = [
     name: HomePage.routeName,
     page: () => const HomePage(),
     binding: HomeBinding(),
-    // middlewares: [SessionMiddleware()],
   ),
   GetPage(
     name: CategoryPage.routeName,
@@ -38,9 +38,11 @@ List<GetPage> appPages = [
   GetPage(
     name: MenuPage.routeName,
     page: () => const MenuPage(),
+    binding: MenuBinding(),
   ),
   GetPage(
     name: CartPage.routeName,
     page: () => const CartPage(),
+    binding: CartBinding(),
   ),
 ];

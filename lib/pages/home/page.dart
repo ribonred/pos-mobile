@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/controllers.dart';
 import '../../utils/colors.dart';
 import '../pages.dart';
-import 'controller.dart';
 import 'tabs/tabs.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -14,7 +12,6 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final POSMenuController menuController = Get.find();
     final List<Map> tabItems = [
       {
         'icon': Icons.home_outlined,
@@ -39,14 +36,6 @@ class HomePage extends GetView<HomeController> {
     ];
 
     return GetX<HomeController>(
-      initState: (state) {
-        String? merchantId = Get.arguments?['merchantId'];
-
-        if (merchantId != null) {
-          menuController.getMenu(merchantId);
-          controller.db.settings.put('merchantId', merchantId);
-        }
-      },
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.primaryOrange,
@@ -88,7 +77,13 @@ class HomePage extends GetView<HomeController> {
                   return _buildNavigationIcon(
                     icon: e['icon'],
                     activeIcon: e['activeIcon'],
-                    onPressed: () => controller.currentIndex.value = tabIndex,
+                    onPressed: () {
+                      if (tabIndex == 3) {
+                        Get.toNamed(CartPage.routeName);
+                      } else {
+                        controller.currentIndex.value = tabIndex;
+                      }
+                    },
                     isActive: currentIndex == tabIndex,
                   );
                 },

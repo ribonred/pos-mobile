@@ -42,23 +42,28 @@ class HomeTab extends GetView<POSMenuController> {
               ?.copyWith(fontWeight: FontWeight.w600),
         ),
         Expanded(
-          child: GridView.count(
-            physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.symmetric(vertical: 24.0),
-            crossAxisCount: 2,
-            mainAxisSpacing: 24.0,
-            children: menuCategories
-                .map(
-                  (e) => _buildCategoryCard(
-                    label: e['name'],
-                    iconFile: e['icon'],
-                    onTap: () => Get.toNamed(
-                      '/menu',
-                      arguments: {'category': e['category']},
+          child: RefreshIndicator(
+            onRefresh: () {
+              return controller.getMenu(Get.arguments?['menuId'] ?? 0);
+            },
+            child: GridView.count(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(vertical: 24.0),
+              crossAxisCount: 2,
+              mainAxisSpacing: 24.0,
+              children: menuCategories
+                  .map(
+                    (e) => _buildCategoryCard(
+                      label: e['name'],
+                      iconFile: e['icon'],
+                      onTap: () => Get.toNamed(
+                        '/menu',
+                        arguments: {'category': e['category']},
+                      ),
                     ),
-                  ),
-                )
-                .toList(),
+                  )
+                  .toList(),
+            ),
           ),
         ),
       ],

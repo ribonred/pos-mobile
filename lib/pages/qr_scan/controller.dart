@@ -1,23 +1,33 @@
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-import '../../models/pos_responses.dart';
+import '../../models/models.dart';
 import '../../providers/pos_api.dart';
+import '../../services/database.dart';
 
 class QRScanController extends GetxController {
+  final DatabaseServices db = Get.find();
   final POSAPIProvider api = Get.find();
+
   final MobileScannerController cameraController = MobileScannerController(
     autoStart: false,
   );
 
   final RxString qrData = ''.obs;
-  final RxString merchantId = ''.obs;
+  final RxBool hasSessionData = false.obs;
   final RxBool isLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     cameraController.start();
+  }
+
+  void updateSession(String sessionId, String merchantId) {
+    hasSessionData.value = true;
+
+    db.session.put('sessionId', sessionId);
+    db.session.put('merchantId', merchantId);
   }
 
   Future<void> onDetect(BarcodeCapture result) async {
@@ -38,7 +48,7 @@ class QRScanController extends GetxController {
       return;
     }
 
-    merchantId.value = response.data.merchantId;
+    updateSession(response.orderSession, response.data.merchantId);
     isLoading.value = false;
   }
 }

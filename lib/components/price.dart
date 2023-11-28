@@ -11,15 +11,18 @@ class Price extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final decimalFormat = NumberFormat.decimalPattern('id_ID');
-    final formatted = decimalFormat
-        .format(amount.runtimeType == String ? double.parse(amount) : amount);
+
+    dynamic amount = this.amount;
+    if (amount is String) {
+      amount = decimalFormat.parse(this.amount);
+    }
 
     return Text.rich(
       TextSpan(
         text: symbol,
         children: [
           TextSpan(
-            text: formatted,
+            text: decimalFormat.format(amount),
             style: const TextStyle(
               fontWeight: FontWeight.w600,
             ),

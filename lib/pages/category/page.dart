@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../components/components.dart';
 import '../../controllers/controllers.dart';
-import '../../models/pos_responses.dart';
+import '../../models/models.dart';
 import '../../utils/asset_images.dart';
 import '../../utils/colors.dart';
 import '../pages.dart';

@@ -31,10 +31,30 @@ jobs:
         run: flutter pub get
       - name: Build APK
         run: flutter build apk --split-per-abi --obfuscate --split-debug-info --release
-      - uses: pyTooling/Actions/releaser@r0
+      - name: Create Release
+        id: create_release
+        uses: zendesk/action-create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          files: |
-            build/app/outputs/apk/release/app-armeabi-v7a-release.apk
-            build/app/outputs/apk/release/app-arm64-v8a-release.apk
-            build/app/outputs/apk/release/app-x86_64-release.apk
+          release_name: 'Latest APK'
+      - name: Upload release assets
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const path = require('path');
+            const fs = require('fs');
+            const release_id = '${{ needs.create_release.outputs.id }}';
+            for (let file of await fs.readdirSync('build/app/outputs/apk/release')) {
+              if (path.extname(file) === '.apk') {
+                console.log('uploadReleaseAsset', file);
+                await github.repos.uploadReleaseAsset({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  release_id: release_id,
+                  name: file,
+                  data: await fs.readFileSync(`./${file}`)
+                });
+              }
+            }

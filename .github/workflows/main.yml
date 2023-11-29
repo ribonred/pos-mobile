@@ -41,12 +41,15 @@ jobs:
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
+          tag: ${{ github.event.head_commit.message }}
         run: |
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
               --generate-notes
+      - name: List files
+        run: |
+          ls -lah
       - name: Upload release assets
         uses: actions/github-script@v3
         with:
@@ -55,7 +58,7 @@ jobs:
             const path = require('path');
             const fs = require('fs');
             const release_id = '${{ needs.create_release.outputs.id }}';
-            for (let file of await fs.readdirSync('build/app/outputs/apk/release')) {
+            for (let file of await fs.readdirSync('./build/app/outputs/apk/release')) {
               if (path.extname(file) === '.apk') {
                 console.log('uploadReleaseAsset', file);
                 await github.repos.uploadReleaseAsset({

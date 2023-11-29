@@ -48,9 +48,9 @@ class HomeTab extends GetView<POSMenuController> {
             },
             child: GridView.count(
               physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.symmetric(vertical: 24.0),
+              padding: const EdgeInsets.symmetric(vertical: 18.0),
               crossAxisCount: 2,
-              mainAxisSpacing: 24.0,
+              mainAxisSpacing: 18.0,
               children: menuCategories
                   .map(
                     (e) => _buildCategoryCard(

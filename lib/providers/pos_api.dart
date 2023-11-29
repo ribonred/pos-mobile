@@ -89,7 +89,7 @@ class POSAPIProvider extends GetConnect {
   Future<bool> updateOrder(int id, int count, String sessionId) async {
     Response response = await patch(
       '/api/v1/orders/$id/',
-      {'count': count},
+      {'quantity': count},
       headers: {'X-Order-Session': sessionId},
     );
 

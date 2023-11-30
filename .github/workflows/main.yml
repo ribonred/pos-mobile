@@ -52,7 +52,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         version: ${{ steps.version.outputs.NEW_VERSION }}
       run: |
-        gh release create "$version" \
+        echo $version
+        gh release create "beta-x" \
+            --repo="$GITHUB_REPOSITORY" \
             --title="${GITHUB_REPOSITORY#*/} ${version#v}" \
             --generate-notes
     - name: List files

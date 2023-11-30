@@ -52,8 +52,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         version: ${{ steps.version.outputs.NEW_VERSION }}
       run: |
-        echo $version
-        gh release create "beta-x" \
+        echo ${{ steps.version.outputs.NEW_VERSION }}
+        gh release create "${{ steps.version.outputs.NEW_VERSION }}" \
             --repo="$GITHUB_REPOSITORY" \
             --title="${GITHUB_REPOSITORY#*/} ${version#v}" \
             --generate-notes

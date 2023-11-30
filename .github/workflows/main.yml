@@ -53,7 +53,6 @@ jobs:
         version: ${{ steps.version.outputs.NEW_VERSION }}
       run: |
         gh release create "$version" \
-            --repo="$GITHUB_REPOSITORY" \
             --title="${GITHUB_REPOSITORY#*/} ${version#v}" \
             --generate-notes
     - name: List files

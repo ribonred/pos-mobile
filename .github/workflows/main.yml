@@ -49,19 +49,22 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: Create release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        version: ${{ needs.build.outputs.new_version }}
+    - name: read file
       run: |
-        echo "version: -> $version"
-        gh release create "$version" \
-            --repo="$GITHUB_REPOSITORY" \
-            --title="${GITHUB_REPOSITORY#*/} ${version#v}" \
-            --generate-notes
-    - name: Upload Apk assets
-      uses: AButler/upload-release-assets@v3.0
-      with:
-        files: "${GITHUB_WORKSPACE}/build/app/outputs/apk/release/*.apk"
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        release-tag: ${{ needs.build.outputs.new_version }}
+        ls ${GITHUB_WORKSPACE}/build/app/outputs/apk/release
+    # - name: Create release
+#   env:
+#     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     version: ${{ needs.build.outputs.new_version }}
+#   run: |
+#     echo "version: -> $version"
+#     gh release create "$version" \
+#         --repo="$GITHUB_REPOSITORY" \
+#         --title="${GITHUB_REPOSITORY#*/} ${version#v}" \
+#         --generate-notes
+# - name: Upload Apk assets
+#   uses: AButler/upload-release-assets@v3.0
+#   with:
+#     files: "${GITHUB_WORKSPACE}/build/app/outputs/apk/release/*.apk"
+#     repo-token: ${{ secrets.GITHUB_TOKEN }}
+#     release-tag: ${{ needs.build.outputs.new_version }}

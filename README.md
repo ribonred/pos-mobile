@@ -6,6 +6,7 @@ POS Client app for Soberdev POS
 
 - create .env file containing the POS server URL, sample is in `.env.sample` file
 - run the app normally
+- flutter SDK >= 3.16
 
 ## Docs and Design
 

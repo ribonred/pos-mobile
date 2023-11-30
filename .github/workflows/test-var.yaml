@@ -1,0 +1,15 @@
+name: test-run-var
+on:
+  workflow_dispatch:
+env:
+  env_var: ${{ vars.DEV }}
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    env:
+      VAR_NAME: value
+    steps:
+    - name: Read environment variable
+      run: echo ${{ vars.POS_URL }}
+

@@ -28,7 +28,7 @@ jobs:
         echo ${{ steps.version.outputs.NEW_VERSION }}
     - name: Make envfile
       run: |
-        echo "POS_API_URL=${{ env.POS_URL }}" >> .env
+        echo "POS_API_URL=https://pc.soberdev.net/" >> .env
     - uses: actions/setup-java@v3
       with:
         distribution: "zulu"

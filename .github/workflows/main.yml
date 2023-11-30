@@ -16,6 +16,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: "Retrieve version"
+        id: version
+        run: |
+          echo "OLD_VERSION=$(cat ${GITHUB_WORKSPACE}/pubspec.yaml | grep 'version:' | head -1 | cut -f2- -d: | sed -e 's/^[ \t]*//')" >> $GITHUB_OUTPUT
+          echo "NEW_VERSION=$(awk '{ match($0,/([0-9]+)\+([0-9]+)/,a); a[1]=a[1]+1; a[2]=a[2]+1; sub(/[0-9]+\+[0-9]+/,a[1]"+"a[2])}1' ${GITHUB_WORKSPACE}/pubspec.yaml | grep 'version:' | head -1 | cut -f2- -d: | sed -e 's/^[ \t]*//')" >> $GITHUB_OUTPUT
+      - name: "Increment version"
+        run: |
+          sed -i 's/${{ steps.version.outputs.OLD_VERSION }}/${{ steps.version.outputs.NEW_VERSION }}/g' ${GITHUB_WORKSPACE}/pubspec.yaml
+          echo ${{ steps.version.outputs.OLD_VERSION }}
+          echo ${{ steps.version.outputs.NEW_VERSION }}
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v2.0
         with:
@@ -41,15 +51,14 @@ jobs:
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.event.head_commit.message }}
+          version: ${{ steps.version.outputs.NEW_VERSION }}
         run: |
-          gh release create "$tag" \
+          gh release create "$version" \
               --repo="$GITHUB_REPOSITORY" \
-              --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
+              --title="${GITHUB_REPOSITORY#*/} ${version#v}" \
               --generate-notes
       - name: List files
-        run: |
-          ls -lah
+        run: ls -lah
       - name: Upload release assets
         uses: actions/github-script@v3
         with:

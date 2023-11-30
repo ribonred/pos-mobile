@@ -63,5 +63,5 @@ jobs:
       uses: AButler/upload-release-assets@v3.0
       with:
         files: "${GITHUB_WORKSPACE}/build/app/outputs/apk/release/*.apk"
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
         release-tag: ${{ needs.build.outputs.new_version }}

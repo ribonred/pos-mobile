@@ -13,5 +13,7 @@ jobs:
       VAR_NAME: value
     steps:
     - name: Read environment variable
-      run: echo ${{ vars.POS_URL }}
+      run: |
+        echo "POS_API_URL=${{ vars.POS_URL }}" >> .env
+        cat .env
 

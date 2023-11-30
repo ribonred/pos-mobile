@@ -19,8 +19,8 @@ jobs:
     - name: "Retrieve version"
       id: version
       run: |
-        echo "OLD_VERSION=$(cat ${GITHUB_WORKSPACE}/pubspec.yaml | grep 'version:' | head -1 | cut -f2- -d: | sed -e 's/^[ \t]*//')" >> $GITHUB_OUTPUT
-        echo "NEW_VERSION=$(awk '{ match($0,/([0-9]+)\+([0-9]+)/,a); a[1]=a[1]+1; a[2]=a[2]+1; sub(/[0-9]+\+[0-9]+/,a[1]"+"a[2])}1' ${GITHUB_WORKSPACE}/pubspec.yaml | grep 'version:' | head -1 | cut -f2- -d: | sed -e 's/^[ \t]*//')" >> $GITHUB_OUTPUT
+        echo "::set-output name=OLD_VERSION::$(cat ${GITHUB_WORKSPACE}/pubspec.yaml | grep 'version:' | head -1 | cut -f2- -d: | sed -e 's/^[ \t]*//')"
+        echo "::set-output name=NEW_VERSION::$(awk '{ match($0,/([0-9]+)\+([0-9]+)/,a); a[1]=a[1]+1; a[2]=a[2]+1; sub(/[0-9]+\+[0-9]+/,a[1]"+"a[2])}1' ${GITHUB_WORKSPACE}/pubspec.yaml | grep 'version:' | head -1 | cut -f2- -d: | sed -e 's/^[ \t]*//')" >> $GITHUB_OUTPUT
     - name: "Increment version"
       run: |
         sed -i 's/${{ steps.version.outputs.OLD_VERSION }}/${{ steps.version.outputs.NEW_VERSION }}/g' ${GITHUB_WORKSPACE}/pubspec.yaml
@@ -52,30 +52,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         version: ${{ steps.version.outputs.NEW_VERSION }}
       run: |
-        echo ${{ steps.version.outputs.NEW_VERSION }}
-        gh release create "${{ steps.version.outputs.NEW_VERSION }}" \
+        gh release create "$version" \
             --repo="$GITHUB_REPOSITORY" \
             --title="${GITHUB_REPOSITORY#*/} ${version#v}" \
             --generate-notes
-    - name: List files
-      run: ls -lah
-    - name: Upload release assets
-      uses: actions/github-script@v3
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        script: |
-          const path = require('path');
-          const fs = require('fs');
-          const release_id = '${{ needs.create_release.outputs.id }}';
-          for (let file of await fs.readdirSync('./build/app/outputs/apk/release')) {
-            if (path.extname(file) === '.apk') {
-              console.log('uploadReleaseAsset', file);
-              await github.repos.uploadReleaseAsset({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                release_id: release_id,
-                name: file,
-                data: await fs.readFileSync(`./${file}`)
-              });
-            }
-          }

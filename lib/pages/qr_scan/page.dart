@@ -95,51 +95,40 @@ class QRScanPage extends GetView<QRScanController> {
         bool hasSessionData = controller.hasSessionData.value;
         bool isLoading = controller.isLoading.value;
 
-        bool isStarting = qrData.isEmpty && !hasSessionData;
-        bool isQRFound = qrData.isNotEmpty && !isLoading;
-        bool sessionStarted = hasSessionData && !isLoading;
+        bool isStarting = qrData.isEmpty;
+        bool gettingMerchant = qrData.isNotEmpty && isLoading;
+        bool merchantNotFound =
+            qrData.isNotEmpty && !isLoading && !hasSessionData;
+        bool sessionStarted = qrData.isNotEmpty && !isLoading && hasSessionData;
 
         String message = '';
         if (isStarting) {
           message = 'Please move the camera\nover another device\'s screen';
-        } else if (isQRFound) {
+        } else if (gettingMerchant) {
           message = 'QR code found, getting merchant information...';
-        } else if (!sessionStarted) {
+        } else if (merchantNotFound) {
           message = 'Merchant cannot be found...';
         }
 
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (!isQRFound || !sessionStarted)
-              Text(
-                message,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
-                textAlign: TextAlign.center,
-              ),
-            if (qrData.isNotEmpty && hasSessionData && !isLoading)
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Colors.white),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 20.0,
-                  ),
-                  foregroundColor: Colors.white,
-                  textStyle: Theme.of(context).textTheme.headlineMedium,
-                ),
-                onPressed: () => Get.offAllNamed(HomePage.routeName),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Continue"),
-                    Spacing.horizontal(),
-                    Icon(Icons.arrow_forward_ios),
-                  ],
-                ),
-              ),
+            !sessionStarted
+                ? Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white,
+                        ),
+                  )
+                : AppButton(
+                    label: 'Proceed',
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                    outlined: true,
+                    backgroundColor: Colors.white,
+                    proceedDelay: 5,
+                    onPressed: () => Get.offAllNamed(HomePage.routeName),
+                  )
           ],
         );
       },

@@ -1,7 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/colors.dart';
-import 'components.dart';
 
 class AppButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -9,6 +9,9 @@ class AppButton extends StatelessWidget {
   final bool outlined;
   final Widget? leading;
   final Widget? trailing;
+  final int? proceedDelay;
+  final Color backgroundColor;
+  final Color foregroundColor;
 
   const AppButton({
     super.key,
@@ -17,6 +20,9 @@ class AppButton extends StatelessWidget {
     this.outlined = false,
     this.leading,
     this.trailing,
+    this.proceedDelay,
+    this.backgroundColor = AppColors.primaryOrange,
+    this.foregroundColor = Colors.white,
   });
 
   @override
@@ -25,38 +31,65 @@ class AppButton extends StatelessWidget {
       horizontal: 20,
       vertical: 20,
     );
-    Color backgroundColor =
-        outlined ? Colors.transparent : AppColors.primaryOrange;
-    Color foregroundColor = outlined ? AppColors.primaryOrange : Colors.white;
     TextStyle? textStyle = Theme.of(context)
         .textTheme
         .headlineMedium
         ?.copyWith(fontWeight: FontWeight.w600);
-    Widget labelWidget = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        if (leading != null) ...[leading!, const Spacing.horizontal()],
-        Text(label),
-        if (trailing != null) ...[
-          const Spacing.horizontal(),
-          trailing!,
-        ]
-      ],
-    );
+    List<Widget> labelWidgetItems = [
+      if (leading != null) leading!,
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Text(label),
+      ),
+      if (trailing != null) trailing!,
+    ];
+
+    if (proceedDelay != null) {
+      // replace last item in labelWidgetItems
+      if (trailing != null) labelWidgetItems.removeLast();
+
+      labelWidgetItems.add(
+        TweenAnimationBuilder<Duration>(
+          duration: Duration(seconds: proceedDelay!),
+          tween: Tween(
+            begin: Duration(seconds: proceedDelay!),
+            end: Duration.zero,
+          ),
+          onEnd: onPressed,
+          builder: (BuildContext context, Duration value, Widget? child) {
+            double progress = clampDouble(
+              (proceedDelay! - value.inSeconds) / proceedDelay!,
+              0.0,
+              1.0,
+            );
+
+            return SizedBox(
+              height: 18.0,
+              width: 18.0,
+              child: CircularProgressIndicator(
+                value: progress,
+                color: outlined ? backgroundColor : foregroundColor,
+              ),
+            );
+          },
+        ),
+      );
+    }
 
     return outlined
         ? OutlinedButton(
             style: OutlinedButton.styleFrom(
               padding: padding,
-              side: const BorderSide(
-                color: Colors.white,
-              ),
-              backgroundColor: backgroundColor,
-              foregroundColor: foregroundColor,
+              side: BorderSide(color: backgroundColor, width: 2.0),
+              backgroundColor: Colors.transparent,
+              foregroundColor: backgroundColor,
               textStyle: textStyle,
             ),
             onPressed: onPressed,
-            child: labelWidget,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: labelWidgetItems,
+            ),
           )
         : ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -66,7 +99,10 @@ class AppButton extends StatelessWidget {
               textStyle: textStyle,
             ),
             onPressed: onPressed,
-            child: labelWidget,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: labelWidgetItems,
+            ),
           );
   }
 }

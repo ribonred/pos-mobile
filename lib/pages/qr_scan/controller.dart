@@ -9,19 +9,9 @@ class QRScanController extends GetxController {
   final DatabaseServices db = Get.find();
   final POSAPIProvider api = Get.find();
 
-  final MobileScannerController cameraController = MobileScannerController(
-    autoStart: false,
-  );
-
   final RxString qrData = ''.obs;
   final RxBool hasSessionData = false.obs;
   final RxBool isLoading = false.obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-    cameraController.start();
-  }
 
   void updateSession(String sessionId, String merchantId) {
     hasSessionData.value = true;
@@ -31,9 +21,6 @@ class QRScanController extends GetxController {
   }
 
   Future<void> onDetect(BarcodeCapture result) async {
-    // stop scan after first result
-    cameraController.stop();
-
     Barcode barcode = result.barcodes.first;
     if (barcode.rawValue == null) {
       return;

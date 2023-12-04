@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../middlewares/middlewares.dart';
 import 'cart/cart.dart';
+import 'cashier_confirmation/cashier_confirmation.dart';
 import 'category/category.dart';
 import 'home/home.dart';
 import 'menu/menu.dart';
@@ -9,6 +10,7 @@ import 'qr_scan/qr_scan.dart';
 import 'welcome/welcome.dart';
 
 export 'cart/cart.dart';
+export 'cashier_confirmation/cashier_confirmation.dart';
 export 'category/category.dart';
 export 'home/home.dart';
 export 'menu/menu.dart';
@@ -44,5 +46,19 @@ List<GetPage> appPages = [
     name: CartPage.routeName,
     page: () => const CartPage(),
     binding: CartBinding(),
+  ),
+  GetPage(
+    name: PaymentPage.routeName,
+    page: () => const PaymentPage(),
+    binding: CartBinding(),
+  ),
+  GetPage(
+    name: CashierConfirmationPage.routeName,
+    page: () => const CashierConfirmationPage(),
+    binding: CashierConfirmationBinding(),
+  ),
+  GetPage(
+    name: SuccessPage.routeName,
+    page: () => const SuccessPage(),
   ),
 ];

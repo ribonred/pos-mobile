@@ -1,6 +1,4 @@
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../models/models.dart';
 import '../../providers/pos_api.dart';
@@ -10,7 +8,6 @@ class CartController extends GetxController {
   final DatabaseServices db = Get.find();
   final POSAPIProvider api = Get.find();
 
-  late final WebSocketChannel? channel;
   late final String sessionId;
 
   List<OrderItem> items = [];
@@ -21,26 +18,10 @@ class CartController extends GetxController {
     super.onInit();
 
     setSessionId();
-    connectWebsocket();
-  }
-
-  @override
-  void onClose() {
-    channel?.sink.close();
-    super.onClose();
   }
 
   void setSessionId() {
     sessionId = db.session.get('sessionId')!;
-  }
-
-  void connectWebsocket() {
-    // String url = '${dotenv.env['POS_API_URL']}order/';
-    // url = url.replaceFirst('http', 'ws');
-
-    // channel = WebSocketChannel.connect(Uri.parse(url));
-
-    channel = null;
   }
 
   void refreshItems() async {

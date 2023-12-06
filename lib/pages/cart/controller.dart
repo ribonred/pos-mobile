@@ -11,7 +11,7 @@ class CartController extends GetxController {
   late final String sessionId;
 
   List<OrderItem> items = [];
-  String total = '0';
+  String total = '0,00';
 
   @override
   void onInit() {

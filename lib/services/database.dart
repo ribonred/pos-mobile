@@ -14,4 +14,8 @@ class DatabaseServices extends GetxService {
 
     return this;
   }
+
+  Future<void> clearSession() async {
+    await session.clear();
+  }
 }

@@ -72,6 +72,7 @@ class CartItem extends StatelessWidget {
                           Price(
                             price,
                             style: Theme.of(context).textTheme.bodyLarge,
+                            usdFormat: false,
                           ),
                           const Spacing.horizontal(),
                           Rating(rating, size: 14.0),

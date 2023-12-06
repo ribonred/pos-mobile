@@ -5,16 +5,28 @@ class Price extends StatelessWidget {
   final dynamic amount;
   final String symbol;
   final TextStyle? style;
+  final bool? usdFormat;
 
-  const Price(this.amount, {super.key, this.symbol = 'Rp. ', this.style});
+  const Price(
+    this.amount, {
+    super.key,
+    this.symbol = 'Rp. ',
+    this.style,
+    this.usdFormat = true,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final decimalFormat = NumberFormat.decimalPattern('id_ID');
-
     dynamic amount = this.amount;
+    NumberFormat parseDecimalFormat = NumberFormat.decimalPattern('id_ID');
+    NumberFormat outputDecimalFormat = NumberFormat.decimalPattern('id_ID');
+
+    if (usdFormat == true) {
+      parseDecimalFormat = NumberFormat.decimalPattern('en_US');
+    }
+
     if (amount is String) {
-      amount = decimalFormat.parse(this.amount);
+      amount = parseDecimalFormat.parse(this.amount);
     }
 
     return Text.rich(
@@ -22,7 +34,7 @@ class Price extends StatelessWidget {
         text: symbol,
         children: [
           TextSpan(
-            text: decimalFormat.format(amount),
+            text: outputDecimalFormat.format(amount),
             style: const TextStyle(
               fontWeight: FontWeight.w600,
             ),

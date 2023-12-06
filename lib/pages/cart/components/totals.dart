@@ -31,7 +31,10 @@ class Totals extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   GetBuilder<CartController>(
-                    builder: (controller) => Price(controller.total),
+                    builder: (controller) => Price(
+                      controller.total,
+                      usdFormat: false,
+                    ),
                   ),
                 ],
               ),
@@ -65,12 +68,20 @@ class Totals extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     GetBuilder<CartController>(
-                      builder: (controller) => Price(controller.total),
+                      builder: (controller) => Price(
+                        controller.total,
+                        usdFormat: false,
+                      ),
                     ),
                   ],
                 ),
                 const Spacing(),
-                AppButton(onPressed: onProceed, label: buttonLabel),
+                GetBuilder<CartController>(
+                  builder: (controller) => AppButton(
+                    onPressed: controller.total != "0,00" ? onProceed : null,
+                    label: buttonLabel,
+                  ),
+                ),
               ],
             ),
           ),

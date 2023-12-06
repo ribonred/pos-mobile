@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../utils/colors.dart';
 
 class AppButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String label;
   final bool outlined;
   final Widget? leading;

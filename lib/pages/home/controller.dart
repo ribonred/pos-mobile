@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../../controllers/controllers.dart';
 import '../../services/database.dart';
+import '../pages.dart';
 
 class HomeController extends GetxController {
   final DatabaseServices db = Get.find();
@@ -12,10 +13,10 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    menuController.getMenu();
+  }
 
-    String? merchantId = db.session.get('merchantId');
-    if (merchantId != null || merchantId != '') {
-      menuController.getMenu(merchantId!);
-    }
+  Future<void> clearSession() async {
+    await db.clearSession().then((_) => Get.offAllNamed(WelcomePage.routeName));
   }
 }

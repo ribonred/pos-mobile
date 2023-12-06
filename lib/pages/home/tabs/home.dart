@@ -43,9 +43,7 @@ class HomeTab extends GetView<POSMenuController> {
         ),
         Expanded(
           child: RefreshIndicator(
-            onRefresh: () {
-              return controller.getMenu(Get.arguments?['menuId'] ?? 0);
-            },
+            onRefresh: () => controller.getMenu(),
             child: GridView.count(
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.symmetric(vertical: 18.0),

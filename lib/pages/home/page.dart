@@ -19,11 +19,6 @@ class HomePage extends GetView<HomeController> {
         'tab': const HomeTab(),
       },
       {
-        'icon': Icons.search_outlined,
-        'activeIcon': Icons.search,
-        'tab': const SearchTab(),
-      },
-      {
         'icon': Icons.favorite_outline,
         'activeIcon': Icons.favorite,
         'tab': const FavoriteTab(),
@@ -31,9 +26,27 @@ class HomePage extends GetView<HomeController> {
       {
         'icon': Icons.shopping_cart_outlined,
         'activeIcon': Icons.shopping_cart,
-        'tab': const HomeTab(),
+        'tab': const SizedBox(),
+      },
+      {
+        'icon': Icons.logout_outlined,
+        'activeIcon': Icons.login_outlined,
+        'tab': const SizedBox(),
       },
     ];
+
+    void onTapNavigation(int index) {
+      switch (index) {
+        case 2:
+          Get.toNamed(CartPage.routeName);
+          break;
+        case 3:
+          controller.clearSession();
+          break;
+        default:
+          controller.currentIndex.value = index;
+      }
+    }
 
     return GetX<HomeController>(
       builder: (controller) {
@@ -77,13 +90,7 @@ class HomePage extends GetView<HomeController> {
                   return _buildNavigationIcon(
                     icon: e['icon'],
                     activeIcon: e['activeIcon'],
-                    onPressed: () {
-                      if (tabIndex == 3) {
-                        Get.toNamed(CartPage.routeName);
-                      } else {
-                        controller.currentIndex.value = tabIndex;
-                      }
-                    },
+                    onPressed: () => onTapNavigation(tabIndex),
                     isActive: currentIndex == tabIndex,
                   );
                 },

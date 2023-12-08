@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,11 +21,11 @@ class MenuPage extends GetView<MenuItemController> {
         builder: (controller) {
           int menuId = Get.arguments?['menuId'] ?? 0;
           List<Menu>? menus = controller.menu;
-          Menu? menu = menus?.where((menu) {
+          Menu? menu = menus.where((menu) {
             return menu.id == menuId;
           }).firstOrNull;
 
-          bool menuEmpty = menus == null || menus.isEmpty;
+          bool menuEmpty = menus.isEmpty;
           bool menuNotFound = menu == null;
 
           if (menuEmpty || menuNotFound) {
@@ -43,10 +44,22 @@ class MenuPage extends GetView<MenuItemController> {
                         color: AppColors.secondaryOrange,
                         width: double.infinity,
                         height: 300.0,
-                        child: Image.asset(
-                          AssetImages.foodIcon,
-                          scale: 0.5,
-                        ),
+                        child: menu.images.isNotEmpty
+                            ? CachedNetworkImage(
+                                imageUrl: menu.images.first,
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  );
+                                },
+                              )
+                            : Image.asset(
+                                AssetImages.foodIcon,
+                                scale: 0.5,
+                              ),
                       ),
                     ),
                   ),

@@ -24,15 +24,15 @@ class OrderItem {
   final int product;
   final int id;
   final int quantity;
-  final String totalDisplay;
+  final String total;
   final String productName;
-  final String productPrice;
+  final double productPrice;
 
   OrderItem({
     required this.product,
     required this.id,
     required this.quantity,
-    required this.totalDisplay,
+    required this.total,
     required this.productName,
     required this.productPrice,
   });
@@ -42,20 +42,18 @@ class OrderItem {
   }
 
   Map<String, dynamic> toJson() => _$OrderItemToJson(this);
-
-  String get price => productPrice.replaceFirst('Rp', '');
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class OrderResult {
   final String uid;
   final List<OrderItem> items;
-  final String totalDisplay;
+  final String orderTotal;
 
   OrderResult({
     required this.uid,
     required this.items,
-    required this.totalDisplay,
+    required this.orderTotal,
   });
 
   factory OrderResult.fromJson(Map<String, dynamic> json) {
@@ -63,8 +61,6 @@ class OrderResult {
   }
 
   Map<String, dynamic> toJson() => _$OrderResultToJson(this);
-
-  String get total => totalDisplay.replaceFirst('Rp', '');
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)

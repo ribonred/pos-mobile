@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../components/components.dart';
@@ -5,8 +6,9 @@ import '../../../utils/asset_images.dart';
 import '../../../utils/colors.dart';
 
 class CartItem extends StatelessWidget {
+  final String? imageUrl;
   final String name;
-  final String price;
+  final double price;
   final double rating;
   final int qty;
   final void Function(int value) onQtyChanged;
@@ -14,6 +16,7 @@ class CartItem extends StatelessWidget {
 
   const CartItem({
     super.key,
+    this.imageUrl,
     required this.name,
     required this.price,
     required this.rating,
@@ -47,7 +50,19 @@ class CartItem extends StatelessWidget {
               ),
               width: 96.0,
               height: 96.0,
-              child: Image.asset(AssetImages.foodIcon),
+              child: imageUrl != null
+                  ? CachedNetworkImage(
+                      imageUrl: imageUrl!,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        );
+                      },
+                    )
+                  : Image.asset(AssetImages.foodIcon),
             ),
           ),
           Expanded(

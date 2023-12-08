@@ -20,16 +20,16 @@ OrderItem _$OrderItemFromJson(Map<String, dynamic> json) => OrderItem(
       product: json['product'] as int,
       id: json['id'] as int,
       quantity: json['quantity'] as int,
-      totalDisplay: json['total_display'] as String,
+      total: json['total'] as String,
       productName: json['product_name'] as String,
-      productPrice: json['product_price'] as String,
+      productPrice: (json['product_price'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$OrderItemToJson(OrderItem instance) => <String, dynamic>{
       'product': instance.product,
       'id': instance.id,
       'quantity': instance.quantity,
-      'total_display': instance.totalDisplay,
+      'total': instance.total,
       'product_name': instance.productName,
       'product_price': instance.productPrice,
     };
@@ -39,14 +39,14 @@ OrderResult _$OrderResultFromJson(Map<String, dynamic> json) => OrderResult(
       items: (json['items'] as List<dynamic>)
           .map((e) => OrderItem.fromJson(e as Map<String, dynamic>))
           .toList(),
-      totalDisplay: json['total_display'] as String,
+      orderTotal: json['order_total'] as String,
     );
 
 Map<String, dynamic> _$OrderResultToJson(OrderResult instance) =>
     <String, dynamic>{
       'uid': instance.uid,
       'items': instance.items,
-      'total_display': instance.totalDisplay,
+      'order_total': instance.orderTotal,
     };
 
 OrderResponse _$OrderResponseFromJson(Map<String, dynamic> json) =>

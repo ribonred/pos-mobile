@@ -11,7 +11,7 @@ class CartController extends GetxController {
   late final String sessionId;
 
   List<OrderItem> items = [];
-  String total = '0,00';
+  String total = '0.00';
 
   @override
   void onInit() {
@@ -29,7 +29,11 @@ class CartController extends GetxController {
 
     if (response != null && response.results.isNotEmpty) {
       items = response.results[0].items;
-      total = response.results[0].total;
+      total = response.results[0].orderTotal;
+
+      // avoid cart item moving around on quantity change
+      items.sort((a, b) => a.id.compareTo(b.id));
+
       update();
     }
   }

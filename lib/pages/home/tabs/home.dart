@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../components/components.dart';
-import '../../../utils/asset_images.dart';
 import '../../../utils/colors.dart';
 import '../../../controllers/controllers.dart';
 
@@ -14,13 +13,6 @@ class HomeTab extends GetView<POSMenuController> {
   Widget build(BuildContext context) {
     DateFormat dateFormat = DateFormat('EEEE');
     String currentDay = dateFormat.format(DateTime.now());
-
-    List<Map> menuCategories = [
-      {'name': 'Food', 'icon': AssetImages.foodIcon, 'category': 'food'},
-      {'name': 'Promo', 'icon': AssetImages.favIcon, 'category': 'promo'},
-      {'name': 'Snack', 'icon': AssetImages.snackIcon, 'category': 'snack'},
-      {'name': 'Drinks', 'icon': AssetImages.drinkIcon, 'category': 'drinks'},
-    ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -49,7 +41,7 @@ class HomeTab extends GetView<POSMenuController> {
               padding: const EdgeInsets.symmetric(vertical: 18.0),
               crossAxisCount: 2,
               mainAxisSpacing: 18.0,
-              children: menuCategories
+              children: controller.menuCategories
                   .map(
                     (e) => _buildCategoryCard(
                       label: e['name'],

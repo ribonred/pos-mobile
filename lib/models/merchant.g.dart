@@ -29,8 +29,8 @@ Map<String, dynamic> _$QRResponseToJson(QRResponse instance) =>
 
 Menu _$MenuFromJson(Map<String, dynamic> json) => Menu(
       id: json['id'] as int,
-      priceDisplay: json['price_display'] as String,
-      basePriceDisplay: json['base_price_display'] as String,
+      images:
+          (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       name: json['name'] as String,
       price: json['price'] as String,
       currency: json['currency'] as String,
@@ -44,8 +44,7 @@ Menu _$MenuFromJson(Map<String, dynamic> json) => Menu(
 
 Map<String, dynamic> _$MenuToJson(Menu instance) => <String, dynamic>{
       'id': instance.id,
-      'price_display': instance.priceDisplay,
-      'base_price_display': instance.basePriceDisplay,
+      'images': instance.images,
       'name': instance.name,
       'price': instance.price,
       'currency': instance.currency,

@@ -6,7 +6,6 @@ import '../../../models/models.dart';
 import '../../../utils/asset_images.dart';
 import '../../pages.dart';
 import '../components/components.dart';
-import '../controller.dart';
 
 class CartPage extends GetView<CartController> {
   static const String routeName = '/cart';
@@ -71,7 +70,7 @@ class CartPage extends GetView<CartController> {
       );
     }
 
-    return ListView.builder(
+    return ListView.separated(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.all(32.0),
       itemCount: controller.items.length,
@@ -80,13 +79,14 @@ class CartPage extends GetView<CartController> {
 
         return CartItem(
           name: item.productName,
-          price: item.price,
+          price: item.productPrice,
           rating: 5.0,
           qty: item.quantity,
           onQtyChanged: (value) => controller.updateItemCount(item.id, value),
           onRemove: () => controller.deleteItem(item.id),
         );
       },
+      separatorBuilder: (context, index) => const Spacing(),
     );
   }
 }

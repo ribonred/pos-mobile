@@ -39,8 +39,7 @@ class QRResponse {
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Menu {
   final int id;
-  final String priceDisplay;
-  final String basePriceDisplay;
+  final List<String> images;
   final String name;
   final String price;
   final String currency;
@@ -52,8 +51,7 @@ class Menu {
 
   Menu({
     required this.id,
-    required this.priceDisplay,
-    required this.basePriceDisplay,
+    required this.images,
     required this.name,
     required this.price,
     required this.currency,

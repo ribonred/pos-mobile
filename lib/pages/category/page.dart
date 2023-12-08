@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -21,18 +22,18 @@ class CategoryPage extends GetView<POSMenuController> {
     return Scaffold(
       body: GetBuilder<POSMenuController>(
         builder: (context) {
-          if (controller.menu == null) {
+          if (controller.menu.isEmpty) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
 
-          List<Menu> menus = controller.menu!
+          List<Menu> menus = controller.menu
               .where((menu) => menu.category.contains(category))
               .toList();
 
           if (category == 'food') {
-            menus = controller.menu!;
+            menus = controller.menu;
           }
 
           return Padding(
@@ -104,7 +105,19 @@ class CategoryPage extends GetView<POSMenuController> {
                         color: AppColors.secondaryOrange,
                         width: double.infinity,
                         height: 120.0,
-                        child: Image.asset(AssetImages.foodIcon),
+                        child: menu.images.isNotEmpty
+                            ? CachedNetworkImage(
+                                imageUrl: menu.images.first,
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  );
+                                },
+                              )
+                            : Image.asset(AssetImages.foodIcon),
                       ),
                     ),
                   ),

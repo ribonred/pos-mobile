@@ -9,7 +9,7 @@ class POSMenuController extends GetxController {
   final DatabaseServices db = Get.find();
   final POSAPIProvider api = Get.find();
 
-  List<Menu> menu = [];
+  List<Menu>? menu;
   List<Map> menuCategories = [
     {'name': 'Food', 'icon': AssetImages.foodIcon, 'category': 'food'},
     {'name': 'Promo', 'icon': AssetImages.favIcon, 'category': 'promo'},
@@ -18,7 +18,11 @@ class POSMenuController extends GetxController {
   ];
 
   Future getMenu() async {
+    menu = null;
+    update();
+
     String? merchantId = db.session.get('merchantId', defaultValue: null);
+
     if (merchantId != null || merchantId != '') {
       menu = await api.getMenu(merchantId!) ?? [];
       update();

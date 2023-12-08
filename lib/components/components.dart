@@ -1,5 +1,6 @@
 export 'button.dart';
 export 'chip.dart';
+export 'item_not_found.dart';
 export 'price.dart';
 export 'quantity.dart';
 export 'rating.dart';

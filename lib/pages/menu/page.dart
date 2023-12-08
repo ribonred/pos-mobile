@@ -21,15 +21,18 @@ class MenuPage extends GetView<MenuItemController> {
         builder: (controller) {
           int menuId = Get.arguments?['menuId'] ?? 0;
           List<Menu>? menus = controller.menu;
-          Menu? menu = menus.where((menu) {
+          Menu? menu = menus?.where((menu) {
             return menu.id == menuId;
           }).firstOrNull;
 
-          bool menuEmpty = menus.isEmpty;
+          bool menuEmpty = menus == null || menus.isEmpty;
           bool menuNotFound = menu == null;
 
           if (menuEmpty || menuNotFound) {
-            return const MenuNotFound();
+            return const ItemNotFoundBox(
+              message: 'Item not found',
+              showBackButton: true,
+            );
           }
 
           return Column(
@@ -201,39 +204,6 @@ class MenuInfo extends StatelessWidget {
             label: 'Add to cart',
           ),
         ],
-      ),
-    );
-  }
-}
-
-class MenuNotFound extends StatelessWidget {
-  const MenuNotFound({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(
-              Icons.question_mark_rounded,
-              size: 120.0,
-              color: Colors.grey,
-            ),
-            Text(
-              'Menu not found',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const Spacing(),
-            AppButton(
-              onPressed: () => Get.back(),
-              label: 'Back',
-              outlined: true,
-            ),
-          ],
-        ),
       ),
     );
   }

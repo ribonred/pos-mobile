@@ -20,37 +20,56 @@ class CategoryPage extends GetView<POSMenuController> {
     String category = Get.arguments?['category'] ?? 'Food';
 
     return Scaffold(
-      body: GetBuilder<POSMenuController>(
-        builder: (context) {
-          if (controller.menu.isEmpty) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
+        child: RefreshIndicator(
+          onRefresh: () => controller.getMenu(),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TitleBar(
+                  title: category.capitalizeFirst!,
+                  showBackButton: true,
+                  addPadding: true,
+                ),
+                const Spacing.large(),
+                const AppTextInput(),
+                const Spacing.small(),
+                GetBuilder<POSMenuController>(builder: (controller) {
+                  // is loading
+                  if (controller.menu == null) {
+                    return SizedBox(
+                      height: Get.width,
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
 
-          List<Menu> menus = controller.menu
-              .where((menu) => menu.category.contains(category))
-              .toList();
+                  // filter menu by category
+                  List<Menu> menus = controller.menu!
+                      .where((menu) => menu.category.contains(category))
+                      .toList();
 
-          if (category == 'food') {
-            menus = controller.menu;
-          }
+                  // if category is food, return all of them
+                  if (category == 'food') {
+                    menus = controller.menu!;
+                  }
 
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TitleBar(
-                    title: category.capitalizeFirst!,
-                    showBackButton: true,
-                    addPadding: true,
-                  ),
-                  const Spacing.large(),
-                  const AppTextInput(),
-                  const Spacing.small(),
-                  MasonryGridView.count(
+                  // if no menu found, show message
+                  if (menus.isEmpty) {
+                    return SizedBox(
+                      height: Get.width,
+                      child: const ItemNotFoundBox(
+                        message: 'No items here...',
+                      ),
+                    );
+                  }
+
+                  // build everything
+                  return MasonryGridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount: 2,
@@ -60,13 +79,13 @@ class CategoryPage extends GetView<POSMenuController> {
                     itemBuilder: (context, index) {
                       return _buildCategoryItem(context, menu: menus[index]);
                     },
-                  ),
-                  const Spacing.xlarge(),
-                ],
-              ),
+                  );
+                }),
+                const Spacing.xlarge(),
+              ],
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

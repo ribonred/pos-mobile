@@ -43,6 +43,11 @@ List<GetPage> appPages = [
     binding: MenuBinding(),
   ),
   GetPage(
+    name: CarouselPage.routeName,
+    page: () => const CarouselPage(),
+    binding: MenuBinding(),
+  ),
+  GetPage(
     name: CartPage.routeName,
     page: () => const CartPage(),
     binding: CartBinding(),

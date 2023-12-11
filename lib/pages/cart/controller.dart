@@ -10,7 +10,7 @@ class CartController extends GetxController {
 
   late final String sessionId;
 
-  List<OrderItem> items = [];
+  List<OrderItem>? items;
   String total = '0.00';
 
   @override
@@ -32,7 +32,7 @@ class CartController extends GetxController {
       total = response.results[0].orderTotal;
 
       // avoid cart item moving around on quantity change
-      items.sort((a, b) => a.id.compareTo(b.id));
+      items?.sort((a, b) => a.id.compareTo(b.id));
 
       update();
     }

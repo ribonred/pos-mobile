@@ -96,9 +96,7 @@ class CategoryPage extends GetView<POSMenuController> {
       child: InkWell(
         onTap: () => Get.toNamed(
           MenuPage.routeName,
-          arguments: {
-            'menuId': menu.id,
-          },
+          arguments: {'menuId': menu.id},
         ),
         child: Container(
           decoration: BoxDecoration(
@@ -143,13 +141,7 @@ class CategoryPage extends GetView<POSMenuController> {
                   Positioned(
                     bottom: 0.0,
                     right: 8.0,
-                    child: FloatingActionButton.small(
-                      shape: const CircleBorder(),
-                      backgroundColor: Colors.white,
-                      heroTag: '${menu.merchant}${menu.code}',
-                      onPressed: () {},
-                      child: const Icon(Icons.favorite_outline),
-                    ),
+                    child: Favorite(menu: menu, small: true),
                   )
                 ],
               ),

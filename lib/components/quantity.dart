@@ -46,6 +46,7 @@ class Quantity extends StatelessWidget {
     return Row(
       children: [
         IconButton(
+          visualDensity: VisualDensity.compact,
           onPressed:
               unlimited || canDecrease ? () => onChanged(quantity - 1) : null,
           icon: Icon(
@@ -57,7 +58,7 @@ class Quantity extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 3 / 4 * size),
+          padding: EdgeInsets.symmetric(horizontal: .5 * size),
           child: Text(
             quantity.toString(),
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -68,6 +69,7 @@ class Quantity extends StatelessWidget {
           ),
         ),
         IconButton(
+          visualDensity: VisualDensity.compact,
           onPressed:
               unlimited || canIncrease ? () => onChanged(quantity + 1) : null,
           icon: Icon(

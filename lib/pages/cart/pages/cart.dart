@@ -64,7 +64,13 @@ class CartPage extends GetView<CartController> {
   }
 
   Widget _buildList(CartController controller) {
-    if (controller.items.isEmpty) {
+    if (controller.items == null) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    if (controller.items!.isEmpty) {
       return const Center(
         child: Text('No orders yet, go order something!'),
       );
@@ -73,9 +79,9 @@ class CartPage extends GetView<CartController> {
     return ListView.separated(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.all(32.0),
-      itemCount: controller.items.length,
+      itemCount: controller.items!.length,
       itemBuilder: (context, index) {
-        OrderItem item = controller.items[index];
+        OrderItem item = controller.items![index];
 
         return CartItem(
           name: item.productName,

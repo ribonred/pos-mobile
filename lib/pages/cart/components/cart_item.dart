@@ -96,6 +96,7 @@ class CartItem extends StatelessWidget {
                     ],
                   ),
                 ),
+                const Spacing.small(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,

@@ -11,6 +11,6 @@ POS Client app for Soberdev POS
 ## Docs and Design
 
 - FIGMA
- [client](https://www.figma.com/file/MTjGrtxsUzsPRM4J7OvaU8/menu-barcode?type=design&node-id=0-1&mode=design&t=JNnr3xjtyAeMzqQA-0)
+ [client](https://www.figma.com/file/HZru2L1LlfKW3XyCKo8BEI/menu-barcode-client?type=design&t=iDE0rkIR9uDG9fHP-6)
 
- [merchant](https://www.figma.com/file/CRQp5s9AqrCdLBHzrq8Sr6/merchant-app?type=design&mode=design&t=JNnr3xjtyAeMzqQA-0)
+ [merchant](https://www.figma.com/file/kBlWhi3qFg2cWXu7hRvaLw/merchant-app?type=design&t=iDE0rkIR9uDG9fHP-6)

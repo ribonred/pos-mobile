@@ -109,7 +109,7 @@ class MenuPage extends GetView<MenuItemController> {
           bottomRight: Radius.circular(32.0),
         ),
         child: Container(
-          color: AppColors.secondaryOrange,
+          color: menu.images.isEmpty ? AppColors.secondaryOrange : null,
           width: double.infinity,
           height: 3 / 4 * Get.width,
           child: menu.images.isNotEmpty
@@ -118,16 +118,19 @@ class MenuPage extends GetView<MenuItemController> {
                     CarouselPage.routeName,
                     arguments: {'menuId': menu.id},
                   ),
-                  child: CachedNetworkImage(
-                    imageUrl: menu.images.first,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
-                      );
-                    },
+                  child: Hero(
+                    tag: 'menu${menu.id}img0',
+                    child: CachedNetworkImage(
+                      imageUrl: menu.images.first,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 )
               : Image.asset(

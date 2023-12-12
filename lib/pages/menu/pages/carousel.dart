@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 
 import '../../../components/components.dart';
 import '../../../controllers/controllers.dart';
@@ -37,26 +38,34 @@ class CarouselPage extends StatelessWidget {
               }
 
               return SafeArea(
-                child: CarouselSlider.builder(
-                  options: CarouselOptions(
-                    height: Get.height,
-                    viewportFraction: 1.0,
-                    // enableInfiniteScroll: false,
+                child: PhotoViewGallery.builder(
+                  scrollPhysics: const BouncingScrollPhysics(),
+                  backgroundDecoration: const BoxDecoration(
+                    color: Colors.white,
                   ),
-                  itemCount: menu.images.length,
-                  itemBuilder: (context, int itemIndex, int pageViewIndex) {
-                    return CachedNetworkImage(
-                      imageUrl: menu.images[itemIndex],
-                      fit: BoxFit.contain,
-                      placeholder: (context, url) {
-                        return const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
-                        );
-                      },
+                  builder: (BuildContext context, int index) {
+                    return PhotoViewGalleryPageOptions(
+                      imageProvider: CachedNetworkImageProvider(
+                        menu.images[index],
+                      ),
+                      initialScale: PhotoViewComputedScale.contained,
+                      heroAttributes: PhotoViewHeroAttributes(
+                        tag: 'menu${menu.id}img$index',
+                      ),
                     );
                   },
+                  itemCount: menu.images.length,
+                  loadingBuilder: (context, e) => Center(
+                    child: SizedBox(
+                      width: 32.0,
+                      height: 32.0,
+                      child: CircularProgressIndicator(
+                        value: e == null
+                            ? null
+                            : e.cumulativeBytesLoaded / e.expectedTotalBytes!,
+                      ),
+                    ),
+                  ),
                 ),
               );
             },

@@ -1,13 +1,32 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-
+import 'package:get/get_connect/http/src/interceptors/get_modifiers.dart';
+import 'package:get/get_connect/http/src/request/request.dart';
 import '../models/models.dart';
+import 'package:platform_device_id_v3/platform_device_id.dart';
 
 class POSAPIProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.baseUrl = dotenv.env['POS_API_URL'];
+    httpClient.addRequestModifier((Request<dynamic> request) async {
+      String? deviceId = await PlatformDeviceId.getDeviceId ?? "unknownid";
+      String osdevice = "unknown";
+      if (kIsWeb) {
+        osdevice = "web";
+      } else if (GetPlatform.isAndroid) {
+        osdevice = "android";
+      } else if (GetPlatform.isIOS) {
+        osdevice = "ios";
+      }
+      Map<String, String> headers = {
+       'X-Device-Info' : "$deviceId;$osdevice;"
+      };
+      request.headers.addAll(headers);
+      return request;
+    });
+
   }
 
   Future<QRResponse?> translateQR(String qrData) async {

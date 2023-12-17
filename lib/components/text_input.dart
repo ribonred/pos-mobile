@@ -4,10 +4,8 @@ import '../utils/colors.dart';
 
 class AppTextInput extends StatelessWidget {
   final EdgeInsets margin;
-  const AppTextInput({
-    Key? key,
-    this.margin = EdgeInsets.zero,
-  }) : super(key: key);
+
+  const AppTextInput({super.key, this.margin = EdgeInsets.zero});
 
   @override
   Widget build(BuildContext context) {

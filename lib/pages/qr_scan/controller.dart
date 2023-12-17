@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -13,11 +16,18 @@ class QRScanController extends GetxController {
   final RxBool hasSessionData = false.obs;
   final RxBool isLoading = false.obs;
 
-  void updateSession(String sessionId, String merchantId) {
+  Future<String?> getEmail() async {
+    const platform = MethodChannel('net.soberdev.pos.client/email');
+    return await platform.invokeMethod('getAccountEmail');
+  }
+
+  void updateSession(String sessionId, String merchantId, {String? email}) {
     hasSessionData.value = true;
 
     db.session.put('sessionId', sessionId);
     db.session.put('merchantId', merchantId);
+
+    if (email != null) db.session.put('userEmail', email);
   }
 
   Future<void> onDetect(BarcodeCapture result) async {
@@ -35,7 +45,12 @@ class QRScanController extends GetxController {
       return;
     }
 
-    updateSession(response.orderSession, response.data.merchantId);
+    String? userEmail = await getEmail();
+    updateSession(
+      response.orderSession,
+      response.data.merchantId,
+      email: userEmail,
+    );
     isLoading.value = false;
   }
 }

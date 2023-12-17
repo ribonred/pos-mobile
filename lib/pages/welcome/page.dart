@@ -1,15 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../components/components.dart';
 import '../../utils/asset_images.dart';
 import '../../utils/colors.dart';
 import '../pages.dart';
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
   static const String routeName = '/welcome';
 
   const WelcomePage({super.key});
+
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  void checkPermission() async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.camera,
+      Permission.contacts,
+    ].request();
+
+    for (Permission permission in statuses.keys) {
+      if (statuses[permission]!.isDenied) {
+        await permission.request();
+      }
+
+      if (statuses[permission]!.isPermanentlyDenied) {
+        Get.defaultDialog(
+          onConfirm: () {
+            Get.back();
+            openAppSettings();
+          },
+          title:
+              "${permission.toString().split(".")[1].capitalize!} permission required",
+          middleText: "Please tap OK to go to app settings to grant permission",
+          barrierDismissible: false,
+        );
+      }
+    }
+
+    if (statuses.keys.every((element) => statuses[element]!.isGranted)) {
+      Get.toNamed(QRScanPage.routeName);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +98,7 @@ class WelcomePage extends StatelessWidget {
               child: AppButton(
                 label: 'Scan QR Code',
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onPressed: () {
-                  Get.toNamed(QRScanPage.routeName);
-                },
+                onPressed: checkPermission,
               ),
             ),
           ),

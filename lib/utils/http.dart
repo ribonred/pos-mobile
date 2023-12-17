@@ -9,9 +9,10 @@ import '../services/services.dart';
 Future<Request> sessionIdInterceptor(Request<dynamic> request) async {
   final DatabaseService db = Get.find();
 
-  String sessionId = db.session.get('sessionId')!;
+  String? sessionId = db.session.get('sessionId');
+  if (sessionId == null) return request;
 
-  request.headers['X-Session-Id'] = sessionId;
+  request.headers['X-Order-Session'] = sessionId;
   return request;
 }
 
@@ -28,6 +29,19 @@ Future<Request> deviceInfoInterceptor(Request<dynamic> request) async {
 
   request.headers['X-Device-Info'] = "$deviceId;$osdevice;";
   return request;
+}
+
+Future<Response> debugInterceptor(Request request, Response response) async {
+  if (kDebugMode) {
+    print('Sending ${request.method} request to: ${request.url}');
+    print('- headers: ${request.headers}');
+    print('- body: ${request.bodyBytes.toString()}');
+    print('And received HTTP ${response.statusCode}');
+    print('- headers: ${response.headers}');
+    print('- body: ${response.body}');
+  }
+  ;
+  return response;
 }
 
 extension ResponseHandler on Response {

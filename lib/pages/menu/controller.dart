@@ -1,15 +1,15 @@
 import 'package:get/get.dart';
 
 import '../../models/models.dart';
-import '../../providers/pos_api.dart';
-import '../../services/database.dart';
+import '../../providers/providers.dart';
+import '../../services/services.dart';
 import '../pages.dart';
 
 class MenuItemController extends GetxController {
   static MenuItemController get to => Get.find();
 
   final DatabaseService db = Get.find();
-  final POSAPIProvider api = Get.find();
+  final OrdersProvider api = Get.find();
 
   int qty = 1;
 
@@ -19,15 +19,9 @@ class MenuItemController extends GetxController {
   }
 
   void addToCart(Menu menu) async {
-    Order order = Order(
-      product: menu.id,
-      quantity: qty,
-    );
-    String sessionId = db.session.get('sessionId')!;
+    Order order = Order(product: menu.id, quantity: qty);
 
-    bool success = await api.createOrder(order, sessionId);
-
-    if (success) {
+    if (await api.createOrder(order)) {
       Get.toNamed(CartPage.routeName);
     }
   }

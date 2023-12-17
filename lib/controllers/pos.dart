@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
 
 import '../models/models.dart';
-import '../pages/menu/menu.dart';
-import '../services/database.dart';
-import '../utils/asset_images.dart';
+import '../providers/providers.dart';
+import '../services/services.dart';
+import '../utils/utils.dart';
 
 class POSController extends GetxController {
   final DatabaseService db = Get.find();
-  final POSMenuProvider api = Get.find();
+  final MerchantProvider api = Get.find();
 
   List<Menu>? menu;
   List<Map> menuCategories = [

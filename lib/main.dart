@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'app.dart';
-import 'providers/pos_api.dart';
-import 'services/database.dart';
+import 'providers/providers.dart';
+import 'services/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +22,10 @@ Future initServices() async {
   if (kDebugMode) print('Starting services...');
 
   await Get.putAsync(() => DatabaseService().init());
-  Get.lazyPut(() => POSAPIProvider(), fenix: true);
+  await Get.putAsync(() => NotificationService().init());
+
+  Get.lazyPut(() => MerchantProvider(), fenix: true);
+  Get.lazyPut(() => OrdersProvider(), fenix: true);
 
   if (kDebugMode) print('Services started.');
 }

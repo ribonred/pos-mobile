@@ -40,7 +40,7 @@ Future<Response> debugInterceptor(Request request, Response response) async {
     print('- headers: ${response.headers}');
     print('- body: ${response.body}');
   }
-  ;
+
   return response;
 }
 

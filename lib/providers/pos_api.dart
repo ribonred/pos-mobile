@@ -1,29 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/request/request.dart';
-import 'package:platform_device_id_v3/platform_device_id.dart';
 
 import '../models/models.dart';
+import '../utils/utils.dart';
 
 class POSAPIProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.baseUrl = dotenv.env['POS_API_URL'];
-    httpClient.addRequestModifier((Request<dynamic> request) async {
-      String? deviceId = await PlatformDeviceId.getDeviceId ?? "unknownid";
-      String osdevice = "unknown";
-      if (kIsWeb) {
-        osdevice = "web";
-      } else if (GetPlatform.isAndroid) {
-        osdevice = "android";
-      } else if (GetPlatform.isIOS) {
-        osdevice = "ios";
-      }
-      Map<String, String> headers = {'X-Device-Info': "$deviceId;$osdevice;"};
-      request.headers.addAll(headers);
-      return request;
-    });
+    httpClient.addRequestModifier(deviceInfoInterceptor);
   }
 
   Future<bool> createOrder(Order order, String sessionId) async {
@@ -92,27 +78,6 @@ class POSAPIProvider extends GetConnect {
       return orderResponse;
     } catch (e) {
       if (kDebugMode) print(e.toString());
-      return null;
-    }
-  }
-
-  Future<QRResponse?> translateQR(String qrData) async {
-    Response response = await post(
-      '/api/v1/merchant/menu/',
-      {'qrdata': qrData},
-    );
-
-    if (kDebugMode) print(response.body.toString());
-
-    if (response.statusCode != 201) {
-      return null;
-    }
-
-    try {
-      QRResponse qrResponse = QRResponse.fromJson(response.body);
-      return qrResponse;
-    } catch (e) {
-      Get.log(e.toString());
       return null;
     }
   }

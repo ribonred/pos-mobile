@@ -1,7 +1,26 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/request/request.dart';
+import 'package:platform_device_id_v3/platform_device_id.dart';
 
 import '../pages/pages.dart';
 import '../services/services.dart';
+
+Future<Request> deviceInfoInterceptor(Request<dynamic> request) async {
+  String? deviceId = await PlatformDeviceId.getDeviceId ?? "unknownid";
+  String osdevice = "unknown";
+  if (kIsWeb) {
+    osdevice = "web";
+  } else if (GetPlatform.isAndroid) {
+    osdevice = "android";
+  } else if (GetPlatform.isIOS) {
+    osdevice = "ios";
+  }
+  Map<String, String> headers = {'X-Device-Info': "$deviceId;$osdevice;"};
+  request.headers.addAll(headers);
+
+  return request;
+}
 
 extension ResponseHandler on Response {
   void handleResponse({

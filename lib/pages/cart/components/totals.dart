@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../components/components.dart';
-import '../../../utils/colors.dart';
-import '../controller.dart';
+import '../../../controllers/controllers.dart';
+import '../../../utils/utils.dart';
 
 class Totals extends StatelessWidget {
   final String buttonLabel;
@@ -30,7 +30,8 @@ class Totals extends StatelessWidget {
                     'Subtotal',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  GetBuilder<CartController>(
+                  GetBuilder<POSController>(
+                    id: 'cartChanged',
                     builder: (controller) => Price(controller.total),
                   ),
                 ],
@@ -64,13 +65,15 @@ class Totals extends StatelessWidget {
                       'Total',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    GetBuilder<CartController>(
+                    GetBuilder<POSController>(
+                      id: 'cartChanged',
                       builder: (controller) => Price(controller.total),
                     ),
                   ],
                 ),
                 const Spacing(),
-                GetBuilder<CartController>(
+                GetBuilder<POSController>(
+                  id: 'cartChanged',
                   builder: (controller) => AppButton(
                     onPressed: controller.total != "0.00" ? onProceed : null,
                     label: buttonLabel,

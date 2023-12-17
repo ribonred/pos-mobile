@@ -16,10 +16,12 @@ class MenuPage extends GetView<MenuItemController> {
 
   @override
   Widget build(BuildContext context) {
+    int menuId = int.parse(Get.parameters['menuId'] ?? '0');
+
     return Scaffold(
-      body: GetBuilder<POSMenuController>(
+      body: GetBuilder<POSController>(
+        id: 'menuChanged',
         builder: (controller) {
-          int menuId = Get.arguments?['menuId'] ?? 0;
           List<Menu>? menus = controller.menu;
           Menu? menu = menus?.where((menu) {
             return menu.id == menuId;

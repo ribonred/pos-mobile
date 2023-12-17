@@ -18,7 +18,7 @@ class SuccessPage extends StatefulWidget {
 }
 
 class _SuccessPageState extends State<SuccessPage> {
-  final DatabaseServices db = Get.find();
+  final DatabaseService db = Get.find();
 
   int countdown = 3;
 

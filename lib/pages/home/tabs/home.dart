@@ -3,10 +3,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../components/components.dart';
-import '../../../utils/colors.dart';
+import '../../../utils/utils.dart';
 import '../../../controllers/controllers.dart';
+import '../../pages.dart';
 
-class HomeTab extends GetView<POSMenuController> {
+class HomeTab extends GetView<POSController> {
   const HomeTab({super.key});
 
   @override
@@ -47,7 +48,7 @@ class HomeTab extends GetView<POSMenuController> {
                       label: e['name'],
                       iconFile: e['icon'],
                       onTap: () => Get.toNamed(
-                        '/menu',
+                        CategoryPage.routeName,
                         arguments: {'category': e['category']},
                       ),
                     ),

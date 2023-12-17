@@ -51,16 +51,19 @@ class CartItem extends StatelessWidget {
               width: 96.0,
               height: 96.0,
               child: imageUrl != null
-                  ? CachedNetworkImage(
-                      imageUrl: imageUrl!,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) {
-                        return const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
-                        );
-                      },
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(24.0),
+                      child: CachedNetworkImage(
+                        imageUrl: imageUrl!,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          );
+                        },
+                      ),
                     )
                   : Image.asset(AssetImages.foodIcon),
             ),

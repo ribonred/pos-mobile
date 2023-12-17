@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../models/models.dart';
-import '../../providers/pos_api.dart';
-import '../../services/database.dart';
+import '../../providers/providers.dart';
+import '../../services/services.dart';
 
 class QRScanController extends GetxController {
-  final DatabaseServices db = Get.find();
-  final POSAPIProvider api = Get.find();
+  final DatabaseService db = Get.find();
+  final MerchantProvider api = Get.find();
 
   final RxString qrData = ''.obs;
   final RxBool hasSessionData = false.obs;

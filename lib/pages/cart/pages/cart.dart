@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pos_mobile_client/controllers/controllers.dart';
 
 import '../../../components/components.dart';
 import '../../../models/models.dart';
@@ -47,8 +48,8 @@ class CartPage extends GetView<CartController> {
                 ),
               ),
               Expanded(
-                child: GetBuilder<CartController>(
-                  initState: (state) => controller.refreshItems(),
+                child: GetBuilder<POSController>(
+                  id: 'cartChanged',
                   builder: (controller) => _buildList(controller),
                 ),
               ),
@@ -63,14 +64,8 @@ class CartPage extends GetView<CartController> {
     );
   }
 
-  Widget _buildList(CartController controller) {
-    if (controller.items == null) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
-    if (controller.items!.isEmpty) {
+  Widget _buildList(POSController controller) {
+    if (controller.cart.isEmpty) {
       return const Center(
         child: Text('No orders yet, go order something!'),
       );
@@ -79,17 +74,18 @@ class CartPage extends GetView<CartController> {
     return ListView.separated(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.all(32.0),
-      itemCount: controller.items!.length,
+      itemCount: controller.cart.length,
       itemBuilder: (context, index) {
-        OrderItem item = controller.items![index];
+        OrderItem item = controller.cart[index];
 
         return CartItem(
+          imageUrl: item.productImage,
           name: item.productName,
           price: item.productPrice,
           rating: 5.0,
           qty: item.quantity,
-          onQtyChanged: (value) => controller.updateItemCount(item.id, value),
-          onRemove: () => controller.deleteItem(item.id),
+          onQtyChanged: (value) => CartController.to.updateQty(item.id, value),
+          onRemove: () => CartController.to.deleteItem(item.id),
         );
       },
       separatorBuilder: (context, index) => const Spacing(),

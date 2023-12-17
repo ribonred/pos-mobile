@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../controllers/controllers.dart';
 
-class SearchTab extends GetView<POSMenuController> {
+class SearchTab extends GetView<POSController> {
   const SearchTab({super.key});
 
   @override

@@ -4,8 +4,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
 import 'app.dart';
-import 'providers/pos_api.dart';
-import 'services/database.dart';
+import 'providers/providers.dart';
+import 'services/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,8 +17,11 @@ void main() async {
 Future initServices() async {
   if (kDebugMode) print('Starting services...');
 
-  await Get.putAsync(() => DatabaseServices().init());
-  Get.lazyPut(() => POSAPIProvider(), fenix: true);
+  await Get.putAsync(() => DatabaseService().init());
+  await Get.putAsync(() => NotificationService().init());
+
+  Get.lazyPut(() => MerchantProvider(), fenix: true);
+  Get.lazyPut(() => OrdersProvider(), fenix: true);
 
   if (kDebugMode) print('Services started.');
 }

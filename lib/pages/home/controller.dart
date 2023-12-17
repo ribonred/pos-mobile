@@ -9,7 +9,7 @@ class HomeController extends GetxController {
   static HomeController get to => Get.find();
 
   final DatabaseService db = Get.find();
-  final POSMenuController menuController = Get.find();
+  final POSController menuController = Get.find();
 
   final RxInt currentIndex = 0.obs;
   final RxList<Menu> favorites = <Menu>[].obs;

@@ -6,7 +6,7 @@ import 'controller.dart';
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => POSMenuController(), fenix: true);
+    Get.lazyPut(() => POSController(), fenix: true);
     Get.put(HomeController());
   }
 }

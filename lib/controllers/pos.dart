@@ -5,7 +5,7 @@ import '../pages/menu/menu.dart';
 import '../services/database.dart';
 import '../utils/asset_images.dart';
 
-class POSMenuController extends GetxController {
+class POSController extends GetxController {
   final DatabaseService db = Get.find();
   final POSMenuProvider api = Get.find();
 

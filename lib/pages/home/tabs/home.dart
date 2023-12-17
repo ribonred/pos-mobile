@@ -6,7 +6,7 @@ import '../../../components/components.dart';
 import '../../../utils/colors.dart';
 import '../../../controllers/controllers.dart';
 
-class HomeTab extends GetView<POSMenuController> {
+class HomeTab extends GetView<POSController> {
   const HomeTab({super.key});
 
   @override

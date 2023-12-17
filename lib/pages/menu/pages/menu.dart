@@ -17,7 +17,7 @@ class MenuPage extends GetView<MenuItemController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<POSMenuController>(
+      body: GetBuilder<POSController>(
         builder: (controller) {
           int menuId = Get.arguments?['menuId'] ?? 0;
           List<Menu>? menus = controller.menu;

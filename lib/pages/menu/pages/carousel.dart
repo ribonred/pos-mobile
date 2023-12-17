@@ -19,7 +19,7 @@ class CarouselPage extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          GetBuilder<POSMenuController>(
+          GetBuilder<POSController>(
             builder: (controller) {
               int menuId = Get.arguments?['menuId'] ?? 0;
               List<Menu>? menus = controller.menu;

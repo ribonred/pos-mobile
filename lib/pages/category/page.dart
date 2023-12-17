@@ -10,7 +10,7 @@ import '../../utils/asset_images.dart';
 import '../../utils/colors.dart';
 import '../pages.dart';
 
-class CategoryPage extends GetView<POSMenuController> {
+class CategoryPage extends GetView<POSController> {
   static const String routeName = '/menu';
 
   const CategoryPage({super.key});
@@ -37,7 +37,7 @@ class CategoryPage extends GetView<POSMenuController> {
                 const Spacing.large(),
                 const AppTextInput(),
                 const Spacing.small(),
-                GetBuilder<POSMenuController>(builder: (controller) {
+                GetBuilder<POSController>(builder: (controller) {
                   // is loading
                   if (controller.menu == null) {
                     return SizedBox(

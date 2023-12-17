@@ -9,7 +9,7 @@ import '../../../utils/asset_images.dart';
 import '../../../utils/colors.dart';
 import '../../pages.dart';
 
-class FavoriteTab extends GetView<POSMenuController> {
+class FavoriteTab extends GetView<POSController> {
   const FavoriteTab({super.key});
 
   @override

@@ -6,6 +6,15 @@ import 'package:platform_device_id_v3/platform_device_id.dart';
 import '../pages/pages.dart';
 import '../services/services.dart';
 
+Future<Request> sessionIdInterceptor(Request<dynamic> request) async {
+  final DatabaseService db = Get.find();
+
+  String sessionId = db.session.get('sessionId')!;
+
+  request.headers['X-Session-Id'] = sessionId;
+  return request;
+}
+
 Future<Request> deviceInfoInterceptor(Request<dynamic> request) async {
   String? deviceId = await PlatformDeviceId.getDeviceId ?? "unknownid";
   String osdevice = "unknown";
@@ -16,9 +25,8 @@ Future<Request> deviceInfoInterceptor(Request<dynamic> request) async {
   } else if (GetPlatform.isIOS) {
     osdevice = "ios";
   }
-  Map<String, String> headers = {'X-Device-Info': "$deviceId;$osdevice;"};
-  request.headers.addAll(headers);
 
+  request.headers['X-Device-Info'] = "$deviceId;$osdevice;";
   return request;
 }
 

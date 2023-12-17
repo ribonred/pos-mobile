@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/interceptors/get_modifiers.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
-import '../models/models.dart';
 import 'package:platform_device_id_v3/platform_device_id.dart';
+
+import '../models/models.dart';
 
 class POSAPIProvider extends GetConnect {
   @override
@@ -20,13 +20,10 @@ class POSAPIProvider extends GetConnect {
       } else if (GetPlatform.isIOS) {
         osdevice = "ios";
       }
-      Map<String, String> headers = {
-       'X-Device-Info' : "$deviceId;$osdevice;"
-      };
+      Map<String, String> headers = {'X-Device-Info': "$deviceId;$osdevice;"};
       request.headers.addAll(headers);
       return request;
     });
-
   }
 
   Future<QRResponse?> translateQR(String qrData) async {

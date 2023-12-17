@@ -1,2 +1,2 @@
-export 'merchant.dart';
+export 'menu.dart';
 export 'order.dart';

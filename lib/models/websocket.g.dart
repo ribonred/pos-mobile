@@ -6,32 +6,36 @@ part of 'websocket.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-OrderItem _$OrderItemFromJson(Map<String, dynamic> json) => OrderItem(
+WebsocketOrderItem _$WebsocketOrderItemFromJson(Map<String, dynamic> json) =>
+    WebsocketOrderItem(
       id: json['id'] as int,
       quantity: json['quantity'] as int,
       product: json['product'] as int,
       total: json['total'] as String,
     );
 
-Map<String, dynamic> _$OrderItemToJson(OrderItem instance) => <String, dynamic>{
+Map<String, dynamic> _$WebsocketOrderItemToJson(WebsocketOrderItem instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'quantity': instance.quantity,
       'product': instance.product,
       'total': instance.total,
     };
 
-Order _$OrderFromJson(Map<String, dynamic> json) => Order(
+WebsocketOrder _$WebsocketOrderFromJson(Map<String, dynamic> json) =>
+    WebsocketOrder(
       uid: json['uid'] as String,
       paid: json['paid'] as bool,
       cancelled: json['cancelled'] as bool,
       merchant: json['merchant'] as String,
       orderTotal: json['order_total'] as String,
       items: (json['items'] as List<dynamic>)
-          .map((e) => OrderItem.fromJson(e as Map<String, dynamic>))
+          .map((e) => WebsocketOrderItem.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
+Map<String, dynamic> _$WebsocketOrderToJson(WebsocketOrder instance) =>
+    <String, dynamic>{
       'uid': instance.uid,
       'paid': instance.paid,
       'cancelled': instance.cancelled,

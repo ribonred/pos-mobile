@@ -11,7 +11,7 @@ class OrdersProvider extends GetConnect {
     httpClient.baseUrl = dotenv.env['POS_API_URL'];
     httpClient.addRequestModifier(deviceInfoInterceptor);
     httpClient.addRequestModifier(sessionIdInterceptor);
-    httpClient.addResponseModifier(debugInterceptor);
+    // httpClient.addResponseModifier(debugInterceptor);
   }
 
   Future<bool> createOrder(Order order) async {

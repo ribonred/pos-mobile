@@ -6,12 +6,10 @@ import 'package:get/get.dart';
 import '../../components/components.dart';
 import '../../controllers/controllers.dart';
 import '../../models/models.dart';
-import '../../utils/asset_images.dart';
-import '../../utils/colors.dart';
-import '../pages.dart';
+import '../../utils/utils.dart';
 
 class CategoryPage extends GetView<POSController> {
-  static const String routeName = '/menu';
+  static const String routeName = '/menu/';
 
   const CategoryPage({super.key});
 
@@ -37,50 +35,53 @@ class CategoryPage extends GetView<POSController> {
                 const Spacing.large(),
                 const AppTextInput(),
                 const Spacing.small(),
-                GetBuilder<POSController>(builder: (controller) {
-                  // is loading
-                  if (controller.menu == null) {
-                    return SizedBox(
-                      height: Get.width,
-                      child: const Center(
-                        child: CircularProgressIndicator(),
-                      ),
+                GetBuilder<POSController>(
+                  id: 'menuChanged',
+                  builder: (controller) {
+                    // is loading
+                    if (controller.menu == null) {
+                      return SizedBox(
+                        height: Get.width,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+
+                    // filter menu by category
+                    List<Menu> menus = controller.menu!
+                        .where((menu) => menu.category.contains(category))
+                        .toList();
+
+                    // if category is food, return all of them
+                    if (category == 'food') {
+                      menus = controller.menu!;
+                    }
+
+                    // if no menu found, show message
+                    if (menus.isEmpty) {
+                      return SizedBox(
+                        height: Get.width,
+                        child: const ItemNotFoundBox(
+                          message: 'No items here...',
+                        ),
+                      );
+                    }
+
+                    // build everything
+                    return MasonryGridView.count(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 8.0,
+                      crossAxisSpacing: 8.0,
+                      itemCount: menus.length,
+                      itemBuilder: (context, index) {
+                        return _buildCategoryItem(context, menu: menus[index]);
+                      },
                     );
-                  }
-
-                  // filter menu by category
-                  List<Menu> menus = controller.menu!
-                      .where((menu) => menu.category.contains(category))
-                      .toList();
-
-                  // if category is food, return all of them
-                  if (category == 'food') {
-                    menus = controller.menu!;
-                  }
-
-                  // if no menu found, show message
-                  if (menus.isEmpty) {
-                    return SizedBox(
-                      height: Get.width,
-                      child: const ItemNotFoundBox(
-                        message: 'No items here...',
-                      ),
-                    );
-                  }
-
-                  // build everything
-                  return MasonryGridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 8.0,
-                    crossAxisSpacing: 8.0,
-                    itemCount: menus.length,
-                    itemBuilder: (context, index) {
-                      return _buildCategoryItem(context, menu: menus[index]);
-                    },
-                  );
-                }),
+                  },
+                ),
                 const Spacing.xlarge(),
               ],
             ),
@@ -94,10 +95,7 @@ class CategoryPage extends GetView<POSController> {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: InkWell(
-        onTap: () => Get.toNamed(
-          MenuPage.routeName,
-          arguments: {'menuId': menu.id},
-        ),
+        onTap: () => Get.toNamed('/menu/${menu.id}'),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,

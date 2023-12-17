@@ -27,6 +27,7 @@ class OrderItem {
   final String total;
   final String productName;
   final double productPrice;
+  final String? productImage;
 
   OrderItem({
     required this.product,
@@ -35,6 +36,7 @@ class OrderItem {
     required this.total,
     required this.productName,
     required this.productPrice,
+    this.productImage,
   });
 
   factory OrderItem.fromJson(Map<String, dynamic> json) {

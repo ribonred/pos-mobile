@@ -2,14 +2,14 @@ import 'package:get/get.dart';
 
 import '../../controllers/controllers.dart';
 import '../../models/models.dart';
-import '../../services/database.dart';
+import '../../services/services.dart';
 import '../pages.dart';
 
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
 
   final DatabaseService db = Get.find();
-  final POSController menuController = Get.find();
+  final POSController posController = Get.find();
 
   final RxInt currentIndex = 0.obs;
   final RxList<Menu> favorites = <Menu>[].obs;
@@ -17,7 +17,8 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    menuController.getMenu();
+    posController.getMenu();
+    posController.getCartData();
   }
 
   Future<void> clearSession() async {

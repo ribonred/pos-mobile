@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
@@ -10,7 +9,7 @@ class MerchantProvider extends GetConnect {
   void onInit() {
     httpClient.baseUrl = dotenv.env['POS_API_URL'];
     httpClient.addRequestModifier(deviceInfoInterceptor);
-    httpClient.addResponseModifier(debugInterceptor);
+    // httpClient.addResponseModifier(debugInterceptor);
   }
 
   Future<QRResponse?> translateQR(String qrData) async {
@@ -18,8 +17,6 @@ class MerchantProvider extends GetConnect {
       '/api/v1/merchant/menu/',
       {'qrdata': qrData},
     );
-
-    if (kDebugMode) print(response.body.toString());
 
     if (response.statusCode != 201) {
       return null;
@@ -36,8 +33,6 @@ class MerchantProvider extends GetConnect {
 
   Future<List<Menu>?> getMenu(String merchantId) async {
     Response response = await get('/api/v1/merchant/menu/$merchantId/');
-
-    if (kDebugMode) print(response.body.toString());
 
     if (response.statusCode != 200) {
       return null;

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'websocket.g.dart';
@@ -9,36 +11,36 @@ enum UpdateAction {
 }
 
 @JsonSerializable()
-class OrderItem {
+class WebsocketOrderItem {
   final int id;
   final int quantity;
   final int product;
   final String total;
 
-  OrderItem({
+  WebsocketOrderItem({
     required this.id,
     required this.quantity,
     required this.product,
     required this.total,
   });
 
-  factory OrderItem.fromJson(Map<String, dynamic> json) {
-    return _$OrderItemFromJson(json);
+  factory WebsocketOrderItem.fromJson(Map<String, dynamic> json) {
+    return _$WebsocketOrderItemFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$OrderItemToJson(this);
+  Map<String, dynamic> toJson() => _$WebsocketOrderItemToJson(this);
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class Order {
+class WebsocketOrder {
   final String uid;
   final bool paid;
   final bool cancelled;
   final String merchant;
   final String orderTotal;
-  final List<OrderItem> items;
+  final List<WebsocketOrderItem> items;
 
-  Order({
+  WebsocketOrder({
     required this.uid,
     required this.paid,
     required this.cancelled,
@@ -47,11 +49,11 @@ class Order {
     required this.items,
   });
 
-  factory Order.fromJson(Map<String, dynamic> json) {
-    return _$OrderFromJson(json);
+  factory WebsocketOrder.fromJson(Map<String, dynamic> json) {
+    return _$WebsocketOrderFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$OrderToJson(this);
+  Map<String, dynamic> toJson() => _$WebsocketOrderToJson(this);
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
@@ -67,6 +69,10 @@ class WebsocketUpdate {
     required this.requestId,
     required this.data,
   });
+
+  factory WebsocketUpdate.fromJsonString(String json) {
+    return WebsocketUpdate.fromJson(jsonDecode(json));
+  }
 
   factory WebsocketUpdate.fromJson(Map<String, dynamic> json) {
     return _$WebsocketUpdateFromJson(json);

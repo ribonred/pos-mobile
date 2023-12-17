@@ -6,7 +6,7 @@ import '../services/database.dart';
 import '../utils/asset_images.dart';
 
 class POSMenuController extends GetxController {
-  final DatabaseServices db = Get.find();
+  final DatabaseService db = Get.find();
   final POSAPIProvider api = Get.find();
 
   List<Menu>? menu;

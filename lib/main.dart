@@ -21,7 +21,7 @@ void main() async {
 Future initServices() async {
   if (kDebugMode) print('Starting services...');
 
-  await Get.putAsync(() => DatabaseServices().init());
+  await Get.putAsync(() => DatabaseService().init());
   Get.lazyPut(() => POSAPIProvider(), fenix: true);
 
   if (kDebugMode) print('Services started.');

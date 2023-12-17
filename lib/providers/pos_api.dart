@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/interceptors/get_modifiers.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
-import '../models/models.dart';
 import 'package:platform_device_id_v3/platform_device_id.dart';
+
+import '../models/models.dart';
 
 class POSAPIProvider extends GetConnect {
   @override
@@ -20,34 +20,41 @@ class POSAPIProvider extends GetConnect {
       } else if (GetPlatform.isIOS) {
         osdevice = "ios";
       }
-      Map<String, String> headers = {
-       'X-Device-Info' : "$deviceId;$osdevice;"
-      };
+      Map<String, String> headers = {'X-Device-Info': "$deviceId;$osdevice;"};
       request.headers.addAll(headers);
       return request;
     });
-
   }
 
-  Future<QRResponse?> translateQR(String qrData) async {
+  Future<bool> createOrder(Order order, String sessionId) async {
     Response response = await post(
-      '/api/v1/merchant/menu/',
-      {'qrdata': qrData},
+      '/api/v1/orders/',
+      order.toJson(),
+      headers: {'X-Order-Session': sessionId},
     );
 
     if (kDebugMode) print(response.body.toString());
 
     if (response.statusCode != 201) {
-      return null;
+      return false;
     }
 
-    try {
-      QRResponse qrResponse = QRResponse.fromJson(response.body);
-      return qrResponse;
-    } catch (e) {
-      Get.log(e.toString());
-      return null;
+    return true;
+  }
+
+  Future<bool> deleteOrder(int id, String sessionId) async {
+    Response response = await delete(
+      '/api/v1/orders/$id/',
+      headers: {'X-Order-Session': sessionId},
+    );
+
+    if (kDebugMode) print(response.body.toString());
+
+    if (response.statusCode != 204) {
+      return false;
     }
+
+    return true;
   }
 
   Future<List<Menu>?> getMenu(String merchantId) async {
@@ -89,20 +96,25 @@ class POSAPIProvider extends GetConnect {
     }
   }
 
-  Future<bool> createOrder(Order order, String sessionId) async {
+  Future<QRResponse?> translateQR(String qrData) async {
     Response response = await post(
-      '/api/v1/orders/',
-      order.toJson(),
-      headers: {'X-Order-Session': sessionId},
+      '/api/v1/merchant/menu/',
+      {'qrdata': qrData},
     );
 
     if (kDebugMode) print(response.body.toString());
 
     if (response.statusCode != 201) {
-      return false;
+      return null;
     }
 
-    return true;
+    try {
+      QRResponse qrResponse = QRResponse.fromJson(response.body);
+      return qrResponse;
+    } catch (e) {
+      Get.log(e.toString());
+      return null;
+    }
   }
 
   Future<bool> updateOrder(int id, int count, String sessionId) async {
@@ -116,21 +128,6 @@ class POSAPIProvider extends GetConnect {
 
     if (response.statusCode != 200) {
       Get.log(response.body.toString());
-      return false;
-    }
-
-    return true;
-  }
-
-  Future<bool> deleteOrder(int id, String sessionId) async {
-    Response response = await delete(
-      '/api/v1/orders/$id/',
-      headers: {'X-Order-Session': sessionId},
-    );
-
-    if (kDebugMode) print(response.body.toString());
-
-    if (response.statusCode != 204) {
       return false;
     }
 

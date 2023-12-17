@@ -8,7 +8,7 @@ import '../pages.dart';
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
 
-  final DatabaseServices db = Get.find();
+  final DatabaseService db = Get.find();
   final POSMenuController menuController = Get.find();
 
   final RxInt currentIndex = 0.obs;

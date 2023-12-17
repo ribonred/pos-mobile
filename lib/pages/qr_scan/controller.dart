@@ -6,7 +6,7 @@ import '../../providers/pos_api.dart';
 import '../../services/database.dart';
 
 class QRScanController extends GetxController {
-  final DatabaseServices db = Get.find();
+  final DatabaseService db = Get.find();
   final POSAPIProvider api = Get.find();
 
   final RxString qrData = ''.obs;

@@ -16,7 +16,7 @@ class POSApp extends StatefulWidget {
 }
 
 class _POSAppState extends State<POSApp> with WidgetsBindingObserver {
-  final DatabaseServices db = Get.find();
+  final DatabaseService db = Get.find();
 
   static const inactivityTimeout = Duration(minutes: 10);
   Timer? sessionEndTimer;

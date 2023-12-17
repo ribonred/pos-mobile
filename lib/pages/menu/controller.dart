@@ -8,7 +8,7 @@ import '../pages.dart';
 class MenuItemController extends GetxController {
   static MenuItemController get to => Get.find();
 
-  final DatabaseServices db = Get.find();
+  final DatabaseService db = Get.find();
   final POSAPIProvider api = Get.find();
 
   int qty = 1;

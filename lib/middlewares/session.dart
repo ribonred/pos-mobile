@@ -5,7 +5,7 @@ import '../pages/pages.dart';
 import '../services/database.dart';
 
 class SessionMiddleware extends GetMiddleware {
-  final DatabaseServices db = Get.find();
+  final DatabaseService db = Get.find();
 
   @override
   RouteSettings? redirect(String? route) {
